@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lbelda <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/11 18:29:24 by lbelda            #+#    #+#             */
-/*   Updated: 2018/02/13 12:21:09 by lbelda           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "wavgen.h"
 
 const uint32_t	h_sc1_size = SC1_SIZE;
@@ -27,12 +15,12 @@ const uint32_t	h_chunk_size = 4 + 8 + h_sc1_size + 8 + h_sc2_size;
 static void	write_header(int fd)
 {
 	// RIFF CHUNK
-	dprintf(fd, "RIFF");
+	write(fd, "RIFF", 4);
 	write(fd, &h_chunk_size, sizeof(uint32_t));
-	dprintf(fd, "WAVE");
+	write(fd, "WAVE", 4);
 
 	// SUB CHUNK 1
-	dprintf(fd, "fmt ");
+	write(fd, "fmt ", 4);
 	write(fd, &h_sc1_size, sizeof(uint32_t));
 	write(fd, &h_audio_format, sizeof(uint16_t));
 	write(fd, &h_nb_channels, sizeof(uint16_t));
@@ -42,35 +30,35 @@ static void	write_header(int fd)
 	write(fd, &h_bits_per_sample, sizeof(uint16_t));
 
 	// SUB CHUNK 2
-	dprintf(fd, "data");
+	write(fd, "data", 4);
 	write(fd, &h_sc2_size, sizeof(uint32_t));
 }
 
-static int16_t	gen_sin(float t, float freq, float phase)
+static void	write_audio_data(int fd, t_tabs *tabs)
 {
-	return (SHRT_MAX * sinf(freq * 2. * M_PI * t + phase));
-}
-
-static void	gen_audio_data(int fd)
-{
-	int16_t	data[NB_SAMPLES];
-	size_t		i;
+	int16_t		*data;
+	uint32_t		i;
 
 	i = 0;
+	data = malloc(sizeof(int16_t) * NB_SAMPLES);
 	while (i < NB_SAMPLES)
 	{
-		data[i] = gen_sin((float)i / (float)NB_SAMPLES, 440., 0.);
+		data[i] = gen_audio((float)i / (float)SAMPLE_RATE, tabs);
 		i++;
 	}
 	write(fd, data, sizeof(int16_t) * NB_SAMPLES);
+	free(data);
 }
 
 int	main(void)
 {
 	int		fd;
+	t_tabs	*tabs;
 
 	fd = prep_file();
+	tabs = malloc(sizeof(t_tabs));
+	prep_random(tabs);
 	write_header(fd);
-	gen_audio_data(fd);
+	write_audio_data(fd, tabs);
 	return (0);
 }
