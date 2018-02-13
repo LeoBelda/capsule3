@@ -16,7 +16,7 @@ static float	gen_rand_sins(float t, uint16_t nb, t_tabs *tabs)
 	a = 1. / (float)nb;
 	while (i < nb)
 	{
-		total += gen_sin(t, tabs->rand_freqs[i] * 10, a, tabs->rand_phases[i]);
+		total += gen_sin(t, tabs->rand_freqs[i], a, tabs->rand_phases[i]);
 		i++;
 	}
 	return (total);

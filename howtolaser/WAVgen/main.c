@@ -50,15 +50,26 @@ static void	write_audio_data(int fd, t_tabs *tabs)
 	free(data);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	size_t	nb_files;
+	size_t	i;
 	int		fd;
 	t_tabs	*tabs;
 
-	fd = prep_file();
+	i = 0;
+	if (argc != 2 || atoi(argv[1]) <= 0)
+		usage_exit();
+	nb_files = (size_t)atoi(argv[1]);
 	tabs = malloc(sizeof(t_tabs));
-	prep_random(tabs);
-	write_header(fd);
-	write_audio_data(fd, tabs);
+	init_random(tabs);
+	while (i < nb_files)
+	{
+		fd = prep_file(i);
+		prep_random(tabs);
+		write_header(fd);
+		write_audio_data(fd, tabs);
+		i++;
+	}
 	return (0);
 }

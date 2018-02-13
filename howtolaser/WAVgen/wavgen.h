@@ -11,9 +11,10 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define PATH "./rec/0001.wav"
+# define PATH_PREFIX "./rec/"
+# define PATH_SUFFIX ".wav"
 
-# define NB_SAMPLES 441000
+# define NB_SAMPLES 44100
 # define SAMPLE_RATE 44100
 # define BITS_PER_SAMPLE 16
 # define NB_CHANNELS 1
@@ -39,9 +40,11 @@ typedef struct	s_tabs
 int16_t			gen_audio(float t, t_tabs *tabs);
 
 void			prep_random(t_tabs *tabs);
-int				prep_file(void);
+void			init_random(t_tabs *tabs);
+int				prep_file(size_t i);
 
 void			error_exit(char *err_str, enum e_err type);
+void			usage_exit(void);
 
 	
 #endif
