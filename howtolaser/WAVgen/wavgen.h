@@ -23,7 +23,9 @@
 # define SC1_SIZE 16
 # define AUDIO_FORMAT 1
 
-# define SIZE_RAND_TABS 5
+# define NB_WAVEFORMS 3
+# define MAX_RAND_TABS 3
+# define MAX_NBFREQS 3
 
 enum	e_err
 {
@@ -33,11 +35,23 @@ enum	e_err
 
 typedef struct	s_tabs
 {
+	float		(*funcs[NB_WAVEFORMS])(float, float, float, float);
+
+	uint16_t	rand_nbfreqs;
 	uint16_t	*rand_freqs;
+	uint16_t	*rand_waves;
 	float		*rand_phases;
 }				t_tabs;
 
-int16_t			gen_audio(float t, t_tabs *tabs);
+
+float			gen_sin(float t, float freq, float a, float phase);
+float			gen_triangle(float t, float freq, float a, float phase);
+float			gen_square(float t, float freq, float a, float phase);
+
+float			gen_rand_triangles(float t, t_tabs *tabs);
+float			gen_rand_sins(float t, t_tabs *tabs);
+float			gen_rand_squares(float t, t_tabs *tabs);
+float			gen_rand_rand(float t, t_tabs *tabs);
 
 void			prep_random(t_tabs *tabs);
 void			init_random(t_tabs *tabs);

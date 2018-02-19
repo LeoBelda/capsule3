@@ -34,7 +34,7 @@ static void	write_header(int fd)
 	write(fd, &h_sc2_size, sizeof(uint32_t));
 }
 
-static void	write_audio_data(int fd, t_tabs *tabs)
+static void	write_audio_data(int fd, t_tabs *tabs, size_t file)
 {
 	int16_t		*data;
 	uint32_t		i;
@@ -43,7 +43,29 @@ static void	write_audio_data(int fd, t_tabs *tabs)
 	data = malloc(sizeof(int16_t) * NB_SAMPLES);
 	while (i < NB_SAMPLES)
 	{
-		data[i] = gen_audio((float)i / (float)SAMPLE_RATE, tabs);
+		switch (file % 4)
+		{
+			case 0:
+				data[i] = gen_rand_sins(
+						(float)i / (float)SAMPLE_RATE,
+						tabs);
+				break;
+			case 1:
+				data[i] = gen_rand_triangles(
+						(float)i / (float)SAMPLE_RATE,
+						tabs);
+				break;
+			case 2:
+				data[i] = gen_rand_squares(
+						(float)i / (float)SAMPLE_RATE,
+						tabs);
+				break;
+			case 3:
+				data[i] = gen_rand_rand(
+						(float)i / (float)SAMPLE_RATE,
+						tabs);
+				break;
+		}
 		i++;
 	}
 	write(fd, data, sizeof(int16_t) * NB_SAMPLES);
@@ -68,7 +90,7 @@ int	main(int argc, char **argv)
 		fd = prep_file(i);
 		prep_random(tabs);
 		write_header(fd);
-		write_audio_data(fd, tabs);
+		write_audio_data(fd, tabs, i);
 		i++;
 	}
 	return (0);

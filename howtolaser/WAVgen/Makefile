@@ -1,15 +1,15 @@
-SRC=main.c gen_audio.c random.c tools.c error.c
+SRC=main.c waveforms.c gen_programs.c random.c tools.c error.c
 OBJ=$(SRC:%.c=%.o)
 INC=wavgen.h 
 
 NAME=WAVgen
-CC=gcc
-CFLAGS=-Wall -Werror -Wextra
+CC=clang
+CFLAGS=-Wall -Werror -Wextra -Wno-unused-function
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-	$(CC) -o $(NAME) $(OBJ)
+	$(CC) -o $(NAME) -lm $(OBJ)
 
 %.o: %.c $(INC)
 	$(CC) $(CFLAGS) -o $@ -c $<
