@@ -12,7 +12,7 @@ const uint32_t	h_sc2_size = NB_SAMPLES * NB_CHANNELS * BITS_PER_SAMPLE / 8;
 
 const uint32_t	h_chunk_size = 4 + 8 + h_sc1_size + 8 + h_sc2_size;
 
-static void	write_header(int fd)
+void	write_header(int fd)
 {
 	// RIFF CHUNK
 	write(fd, "RIFF", 4);
@@ -34,64 +34,27 @@ static void	write_header(int fd)
 	write(fd, &h_sc2_size, sizeof(uint32_t));
 }
 
-static void	write_audio_data(int fd, t_tabs *tabs, size_t file)
+int			prep_file_machine(size_t i)
 {
-	int16_t		*data;
-	uint32_t		i;
+	int		fd;
+	char	*prefix = PATH_PREFIX;
+	char	*suffix = PATH_SUFFIX;
+	char	path[32];
 
-	i = 0;
-	data = malloc(sizeof(int16_t) * NB_SAMPLES);
-	while (i < NB_SAMPLES)
-	{
-		switch (file % 4)
-		{
-			case 0:
-				data[i] = gen_rand_sins(
-						(float)i / (float)SAMPLE_RATE,
-						tabs);
-				break;
-			case 1:
-				data[i] = gen_rand_triangles(
-						(float)i / (float)SAMPLE_RATE,
-						tabs);
-				break;
-			case 2:
-				data[i] = gen_rand_squares(
-						(float)i / (float)SAMPLE_RATE,
-						tabs);
-				break;
-			case 3:
-				data[i] = gen_rand_rand(
-						(float)i / (float)SAMPLE_RATE,
-						tabs);
-				break;
-		}
-		i++;
-	}
-	write(fd, data, sizeof(int16_t) * NB_SAMPLES);
-	free(data);
+	fd = 0;
+	sprintf(path, "%s%06zu%s", prefix, i + 1, suffix);
+	if (!(fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777)))
+		error_exit("Couldnt create file", E_FATAL);
+	return (fd);
 }
 
-int	main(int argc, char **argv)
+int			prep_file_shaderz(void)
 {
-	size_t	nb_files;
-	size_t	i;
 	int		fd;
-	t_tabs	*tabs;
+	char	*path = SHADER_NAME;
 
-	i = 0;
-	if (argc != 2 || atoi(argv[1]) <= 0)
-		usage_exit();
-	nb_files = (size_t)atoi(argv[1]);
-	tabs = malloc(sizeof(t_tabs));
-	init_random(tabs);
-	while (i < nb_files)
-	{
-		fd = prep_file(i);
-		prep_random(tabs);
-		write_header(fd);
-		write_audio_data(fd, tabs, i);
-		i++;
-	}
-	return (0);
+	fd = 0;
+	if (!(fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777)))
+		error_exit("Couldnt create file", E_FATAL);
+	return (fd);
 }

@@ -41,21 +41,22 @@ static void	prep_funcs(float (*f[])(float, float, float, float))
 	f[0] = &gen_sin;
 	f[1] = &gen_triangle;
 	f[2] = &gen_square;
+	f[3] = &gen_sawtooth;
 }
 
-void	prep_random(t_tabs *tabs)
+void	prep_random(t_env *e)
 {
-	tabs->rand_nbfreqs = rand() % MAX_NBFREQS + 1;
-	random_waves(tabs->rand_nbfreqs, tabs->rand_waves);
-	random_freqs(tabs->rand_nbfreqs, tabs->rand_freqs, 20, 300);
-	random_phases(tabs->rand_nbfreqs, tabs->rand_phases);
+	e->rand_nbfreqs = rand() % MAX_NBFREQS + 1;
+	random_waves(e->rand_nbfreqs, e->rand_waves);
+	random_freqs(e->rand_nbfreqs, e->rand_freqs, 4, 400);
+	random_phases(e->rand_nbfreqs, e->rand_phases);
 }
 
-void	init_random(t_tabs *tabs)
+void	init_random(t_env *e)
 {
 	srand(time(NULL));
-	prep_funcs(tabs->funcs);
-	tabs->rand_freqs = malloc(sizeof(uint16_t) * MAX_RAND_TABS);
-	tabs->rand_waves = malloc(sizeof(float) * MAX_RAND_TABS);
-	tabs->rand_phases = malloc(sizeof(float) * MAX_RAND_TABS);
+	prep_funcs(e->funcs);
+	e->rand_freqs = malloc(sizeof(uint16_t) * MAX_RAND_TABS);
+	e->rand_waves = malloc(sizeof(float) * NB_WAVEFORMS);
+	e->rand_phases = malloc(sizeof(float) * MAX_RAND_TABS);
 }
