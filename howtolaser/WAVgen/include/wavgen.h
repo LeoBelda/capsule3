@@ -1,6 +1,8 @@
 #ifndef WAVGEN_H
 # define WAVGEN_H
 
+# include <alsa/asoundlib.h>
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -10,6 +12,7 @@
 # include <time.h>
 # include <fcntl.h>
 # include <math.h>
+# include "SDL.h"
 
 # define PATH_PREFIX "./bank/"
 # define PATH_SUFFIX ".wav"
@@ -46,6 +49,12 @@ typedef struct	s_env
 	enum e_mode	mode;
 
 	//SDL stuff
+	int					quit;
+	SDL_Window			*win;
+	SDL_GameController	*controller;
+
+	//ALSA stuff
+	snd_pcm_t	*sd_handle;
 
 	//machine learning elements
 

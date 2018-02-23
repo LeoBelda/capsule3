@@ -12,6 +12,14 @@ INCFILES=wavgen.h
 INCDIR=include/
 INC=$(addprefix $(INCDIR), $(INCFILES))
 
+LIBDIR=libs/
+SDLDIR=$(addprefix $(LIBDIR), SDL2/lib/)
+SDLINCDIR=$(addprefix $(LIBDIR), SDL2/include/)
+LIBSDL=libSDL2.a
+SDLLK=SDL2
+
+RPATHSDL=\$$ORIGIN/libs/SDL2/lib/
+
 NAME=WAVgen
 CC=clang
 CFLAGS=-Wall -Werror -Wextra -Wno-unused-function
@@ -19,10 +27,11 @@ CFLAGS=-Wall -Werror -Wextra -Wno-unused-function
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-	$(CC) -o $(NAME) -I$(INCDIR) -lm $(OBJ)
+	$(CC) -o $(NAME) -I$(INCDIR) -I$(SDLINCDIR) -L$(SDLDIR) -l$(SDLLK) -lasound -lm $(OBJ) -Wl,-rpath,$(RPATHSDL)
+
 
 %.o: %.c $(INC)
-	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) -I$(INCDIR) -I$(SDLINCDIR) -o $@ -c $<
 
 clean:
 	rm -rf $(OBJ)
