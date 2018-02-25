@@ -5,6 +5,11 @@ float	gen_sin(float t, float freq, float a, float phase)
 	return (a * sinf(freq * 2. * M_PI * t + phase));
 }
 
+float	gen_sin_live(float t, float freq, float a, float phase)
+{
+	return (a * sinf(freq * 2. * M_PI * t + phase));
+}
+
 float	gen_fuck(float t, float freq, float a, float phase)
 {
 	return fabs(a * sinf(freq * log(fmod(t, 100.)) * M_PI * t + phase));

@@ -18,10 +18,13 @@
 # define PATH_SUFFIX ".wav"
 # define SHADER_NAME "./shaderz/new.wav"
 
-# define NB_SAMPLES 44100
+# define NB_SAMPLES 88200
 # define SAMPLE_RATE 44100
 # define BITS_PER_SAMPLE 16
 # define NB_CHANNELS 1
+
+# define PERIOD_SIZE 2048
+# define BUFFER_SIZE 8192
 
 # define HEADER_SIZE 44
 # define SC1_SIZE 16
@@ -55,6 +58,11 @@ typedef struct	s_env
 
 	//ALSA stuff
 	snd_pcm_t	*sd_handle;
+
+	float		freq1;
+	float		freq2;
+	float		inc1;
+	float		inc2;
 
 	//machine learning elements
 
@@ -96,6 +104,7 @@ void			ps3_program(t_env *e);
 
 //MATH STUFF
 float			gen_sin(float t, float freq, float a, float phase);
+float			gen_sin_live(float t, float freq, float a, float phase);
 float			gen_triangle(float t, float freq, float a, float phase);
 float			gen_sawtooth(float t, float freq, float a, float phase);
 float			gen_square(float t, float freq, float a, float phase);
