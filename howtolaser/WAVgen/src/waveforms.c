@@ -17,8 +17,8 @@ float	gen_fuck(float t, float freq, float a, float phase)
 
 float	gen_triangle(float t, float freq, float a, float phase)
 {
-	(void)phase;
-	return (2 * a * freq * (fabs(fmod(t, 1 / freq) - 1. / (freq * 2.)) - 1. / (freq * 4.)));
+	return (4 * a * freq * (fabs(fmod(t + ((0.75 +
+				sinf(phase))/ freq), 1 / freq) - 1. / (freq * 2.)) - 1. / (freq * 4.) ));
 }
 
 float	gen_square(float t, float freq, float a, float phase)

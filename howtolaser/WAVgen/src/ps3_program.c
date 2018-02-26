@@ -64,10 +64,12 @@ static void		handle_SDL_events(t_env *e)
 	{
 		if (event.key.keysym.sym == SDLK_ESCAPE)
 			e->quit = 1;
+		if (event.key.keysym.sym == SDLK_f)
+			printf("%fHz, %ffHz\n", e->freq1, e->freq2);
 		if (abs(event.caxis.value) <= 5500)
 			event.caxis.value = 0;
-		e->inc1 = -(float)SDL_GameControllerGetAxis(e->controller, 1) / (float)SHRT_MAX;
-		e->inc2 = -(float)SDL_GameControllerGetAxis(e->controller, 3) / (float)SHRT_MAX;
+		e->inc1 = -0.25 * (float)SDL_GameControllerGetAxis(e->controller, 1) / (float)SHRT_MAX;
+		e->inc2 = -0.25 * (float)SDL_GameControllerGetAxis(e->controller, 3) / (float)SHRT_MAX;
 		/*
 		if (event.caxis.axis == SDL_CONTROLLER_AXIS_LEFTY)
 			e->inc1 = -(float)event.caxis.value / (float)SHRT_MAX;
@@ -88,8 +90,8 @@ void		ps3_program(t_env *e)
 
 	init_SDL(e);
 	init_alsa(e);
-	e->freq1 = 440;
-	e->freq2 = 220;
+	e->freq1 = 133;
+	e->freq2 = 106;
 	e->inc1 = 0;
 	e->inc2 = 0;
 	while (!e->quit)
