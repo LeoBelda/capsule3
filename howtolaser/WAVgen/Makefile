@@ -1,6 +1,24 @@
-SRC=main.c waveforms.c gen_programs.c random.c tools.c error.c
+SRCFILES=main.c \
+		 machine_program.c gen_programs.c random.c \
+		 shaderz_program.c test_funcs.c \
+		 ps3_program.c \
+		 waveforms.c tools.c error.c
+SRCDIR=src/
+SRC=$(addprefix $(SRCDIR), $(SRCFILES))
+
 OBJ=$(SRC:%.c=%.o)
-INC=wavgen.h 
+
+INCFILES=wavgen.h 
+INCDIR=include/
+INC=$(addprefix $(INCDIR), $(INCFILES))
+
+LIBDIR=libs/
+SDLDIR=$(addprefix $(LIBDIR), SDL2/lib/)
+SDLINCDIR=$(addprefix $(LIBDIR), SDL2/include/)
+LIBSDL=libSDL2.a
+SDLLK=SDL2
+
+RPATHSDL=\$$ORIGIN/libs/SDL2/lib/
 
 NAME=WAVgen
 CC=clang
@@ -9,17 +27,18 @@ CFLAGS=-Wall -Werror -Wextra -Wno-unused-function
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-	$(CC) -o $(NAME) -lm $(OBJ)
+	$(CC) -o $(NAME) -I$(INCDIR) -I$(SDLINCDIR) -L$(SDLDIR) -l$(SDLLK) -lasound -lm $(OBJ) -Wl,-rpath,$(RPATHSDL)
+
 
 %.o: %.c $(INC)
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -I$(INCDIR) -I$(SDLINCDIR) -o $@ -c $<
 
 clean:
 	rm -rf $(OBJ)
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf rec/*
+	rm -rf bank/*
 
 re: fclean all
 
