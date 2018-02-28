@@ -48,7 +48,7 @@ void	prep_random(t_env *e)
 {
 	e->rand_nbfreqs = rand() % MAX_NBFREQS + 1;
 	random_waves(e->rand_nbfreqs, e->rand_waves);
-	random_freqs(e->rand_nbfreqs, e->rand_freqs, 4, 400);
+	random_freqs(e->rand_nbfreqs, e->rand_freqs, 8, 300);
 	random_phases(e->rand_nbfreqs, e->rand_phases);
 }
 

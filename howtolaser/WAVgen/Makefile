@@ -2,13 +2,14 @@ SRCFILES=main.c \
 		 machine_program.c gen_programs.c random.c \
 		 shaderz_program.c test_funcs.c \
 		 ps3_program.c events.c \
-		 waveforms.c tools.c error.c
+		 waveforms.c tools.c error.c \
+		 tinyosc/oscmain.c tinyosc/tinyosc.c
 SRCDIR=src/
 SRC=$(addprefix $(SRCDIR), $(SRCFILES))
 
 OBJ=$(SRC:%.c=%.o)
 
-INCFILES=wavgen.h 
+INCFILES=wavgen.h tinyosc.h
 INCDIR=include/
 INC=$(addprefix $(INCDIR), $(INCFILES))
 
@@ -22,7 +23,9 @@ RPATHSDL=\$$ORIGIN/libs/SDL2/lib/
 
 NAME=WAVgen
 CC=clang
-CFLAGS=-Wall -Werror -Wextra -Wno-unused-function
+CFLAGS=-Wall -Werror -Wextra -Wno-unused-function \
+	   -Wno-unused-parameter -Wno-unused-variable -Wno-format\
+	   -Wno-sign-compare
 
 all: $(NAME)
 

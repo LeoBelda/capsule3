@@ -2,9 +2,14 @@
 # define WAVGEN_H
 
 # include <alsa/asoundlib.h>
+# include "tinyosc.h"
 
+# include <arpa/inet.h>
+# include <sys/select.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
+# include <stdbool.h>
 # include <string.h>
 # include <unistd.h>
 # include <inttypes.h>
@@ -18,21 +23,23 @@
 # define PATH_SUFFIX ".wav"
 # define SHADER_NAME "./shaderz/new.wav"
 
-# define NB_SAMPLES 88200
+# define NB_SAMPLES 44100
 # define SAMPLE_RATE 44100
 # define BITS_PER_SAMPLE 16
 # define NB_CHANNELS 1
 
-# define PERIOD_SIZE 2048
-# define BUFFER_SIZE 8192
+# define PERIOD_SIZE 1024
+# define BUFFER_SIZE PERIOD_SIZE * 4
 
 # define HEADER_SIZE 44
 # define SC1_SIZE 16
 # define AUDIO_FORMAT 1
 
 # define NB_WAVEFORMS 4
-# define MAX_RAND_TABS 2
-# define MAX_NBFREQS 2
+# define MAX_RAND_TABS 1
+# define MAX_NBFREQS 1
+
+# define NB_BCI 5
 
 enum	e_err
 {
@@ -61,8 +68,13 @@ typedef struct	s_env
 
 	float		freq1;
 	float		freq2;
+
 	float		inc1;
 	float		inc2;
+
+	float		data_bci[5];
+	float		prev_bci[5];
+
 	size_t		freq1_select;
 	size_t		freq2_select;
 
@@ -106,6 +118,7 @@ float			phase_swipe(uint32_t i);
 void			ps3_program(t_env *e);
 
 void			handle_SDL_events(t_env *e);
+void 			tosc_bci(tosc_message *osc, t_env *e);
 
 //MATH STUFF
 float			gen_sin(float t, float freq, float a, float phase);
