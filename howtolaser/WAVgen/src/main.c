@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 
 	e = malloc(sizeof(t_env));
 	parse_args(e, argc, argv);
+	prep_funcs(e->funcs);
 	switch (e->mode)
 	{
 		case M_MACHINE:

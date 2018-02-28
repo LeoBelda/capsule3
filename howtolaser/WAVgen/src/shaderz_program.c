@@ -10,8 +10,8 @@ static void	write_shaderz(int fd, t_env *e)
 	data = malloc(sizeof(int16_t) * NB_SAMPLES);
 	while (i < NB_SAMPLES)
 	{
-		data[i] = gen_sin((float)i / (float)SAMPLE_RATE,
-				 4 , 1., M_PI * 0.5) * SHRT_MAX;
+		data[i] = gen_square((float)i / (float)SAMPLE_RATE,
+				 4 , 1., 0) * SHRT_MAX;
 		//data[i] += (gen_triangle((float)i / (float)SAMPLE_RATE,
 		//			freq_swipe(i, 48, 102), 0.32, 0) * SHRT_MAX);
 		//data[i] += (gen_sin((float)i / (float)SAMPLE_RATE,

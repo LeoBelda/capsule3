@@ -36,48 +36,34 @@ static void	close_SDL(t_env *e)
 	SDL_Quit();
 }
 
-static void		gen_audio(int16_t *buf, float freq1, float freq2, float *phases)
+static void		gen_audio(t_env *e, int16_t *buf, float *phases)
 {
 	size_t	i;
 	float	steps[2];
 
 	i = 0;
-	steps[0] = 2 * M_PI * PERIOD_SIZE * freq1 / (float)SAMPLE_RATE;
-	steps[1] = 2 * M_PI * PERIOD_SIZE * freq2 / (float)SAMPLE_RATE;
+	steps[0] = 2 * M_PI * PERIOD_SIZE * e->freq1 / (float)SAMPLE_RATE;
+	steps[1] = 2 * M_PI * PERIOD_SIZE * e->freq2 / (float)SAMPLE_RATE;
 	while (i < PERIOD_SIZE)
 	{
-		buf[i] = gen_sin((float)i / (float)SAMPLE_RATE,
-				freq1, 0.5, phases[0]) * SHRT_MAX;
-		buf[i] += gen_sin((float)i / (float)SAMPLE_RATE,
-				freq2, 0.5, phases[1]) * SHRT_MAX;
+		buf[i] = e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
+				e->freq1, 0.5, phases[0]) * SHRT_MAX;
+		buf[i] += e->funcs[e->freq2_select]((float)i / (float)SAMPLE_RATE,
+				e->freq2, 0.5, phases[1]) * SHRT_MAX;
 		i++;
 	}
 	phases[0] = fmod(phases[0] + steps[0], 2 * M_PI);
 	phases[1] = fmod(phases[1] + steps[1], 2 * M_PI);
 }
 
-static void		handle_SDL_events(t_env *e)
+static void	refresh_freqs(t_env *e)
 {
-	SDL_Event	event;
-
-	while (SDL_PollEvent(&event))
-	{
-		if (event.key.keysym.sym == SDLK_ESCAPE)
-			e->quit = 1;
-		if (event.key.keysym.sym == SDLK_f)
-			printf("%fHz, %ffHz\n", e->freq1, e->freq2);
-		if (abs(event.caxis.value) <= 5500)
-			event.caxis.value = 0;
-		e->inc1 = -0.25 * (float)SDL_GameControllerGetAxis(e->controller, 1) / (float)SHRT_MAX;
-		e->inc2 = -0.25 * (float)SDL_GameControllerGetAxis(e->controller, 3) / (float)SHRT_MAX;
-		/*
-		if (event.caxis.axis == SDL_CONTROLLER_AXIS_LEFTY)
-			e->inc1 = -(float)event.caxis.value / (float)SHRT_MAX;
-		if (event.caxis.axis == SDL_CONTROLLER_AXIS_RIGHTY)
-			e->inc2 = -(float)event.caxis.value / (float)SHRT_MAX;
-			*/
-	}
-	return;
+	e->freq1 += e->inc1;
+	e->freq2 += e->inc2;
+	if (e->freq1 > 350 || e->freq1 < 2)
+		e->freq1 = 133;
+	if (e->freq2 > 350 || e->freq2 < 2)
+		e->freq2 = 106;
 }
 
 void		ps3_program(t_env *e)
@@ -94,10 +80,12 @@ void		ps3_program(t_env *e)
 	e->freq2 = 106;
 	e->inc1 = 0;
 	e->inc2 = 0;
+	e->freq1_select = 0;
+	e->freq2_select = 0;
 	while (!e->quit)
 	{
 		handle_SDL_events(e);
-		gen_audio(buf, e->freq1, e->freq2, phases);
+		gen_audio(e, buf, phases);
 		cptr = PERIOD_SIZE;
 		ptr = buf;
 		while (cptr > 0)
@@ -113,8 +101,7 @@ void		ps3_program(t_env *e)
 			cptr -= frames;
 			ptr += frames;
 		}
-		e->freq1 += e->inc1;
-		e->freq2 += e->inc2;
+		refresh_freqs(e);
 	}
 	snd_pcm_close(e->sd_handle);
 	close_SDL(e);

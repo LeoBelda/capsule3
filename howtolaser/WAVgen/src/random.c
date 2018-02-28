@@ -36,7 +36,7 @@ static void	random_waves(size_t size, uint16_t *tab)
 	}
 }
 
-static void	prep_funcs(float (*f[])(float, float, float, float))
+void	prep_funcs(float (*f[])(float, float, float, float))
 {
 	f[0] = &gen_sin;
 	f[1] = &gen_triangle;
@@ -55,7 +55,6 @@ void	prep_random(t_env *e)
 void	init_random(t_env *e)
 {
 	srand(time(NULL));
-	prep_funcs(e->funcs);
 	e->rand_freqs = malloc(sizeof(uint16_t) * MAX_RAND_TABS);
 	e->rand_waves = malloc(sizeof(float) * NB_WAVEFORMS);
 	e->rand_phases = malloc(sizeof(float) * MAX_RAND_TABS);

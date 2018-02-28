@@ -63,6 +63,8 @@ typedef struct	s_env
 	float		freq2;
 	float		inc1;
 	float		inc2;
+	size_t		freq1_select;
+	size_t		freq2_select;
 
 	//machine learning elements
 
@@ -82,6 +84,7 @@ int				prep_file_machine(size_t i);
 int				prep_file_shaderz(void);
 void			init_random(t_env *e);
 void			prep_random(t_env *e);
+void			prep_funcs(float (*f[])(float, float, float, float));
 
 //MACHINE STUFF
 void			machine_program(t_env *e);
@@ -101,6 +104,8 @@ float			phase_swipe(uint32_t i);
 
 //PS3 STUFF
 void			ps3_program(t_env *e);
+
+void			handle_SDL_events(t_env *e);
 
 //MATH STUFF
 float			gen_sin(float t, float freq, float a, float phase);

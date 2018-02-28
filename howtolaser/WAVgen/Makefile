@@ -1,7 +1,7 @@
 SRCFILES=main.c \
 		 machine_program.c gen_programs.c random.c \
 		 shaderz_program.c test_funcs.c \
-		 ps3_program.c \
+		 ps3_program.c events.c \
 		 waveforms.c tools.c error.c
 SRCDIR=src/
 SRC=$(addprefix $(SRCDIR), $(SRCFILES))
