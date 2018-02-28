@@ -11,7 +11,9 @@ int16_t		map_to_int16(double min, double max, double d)
 	double	range;
 	
 	range = max - min;
-	return ((int16_t)((d / range) * USHRT_MAX + SHRT_MIN));
+	(void)range;
+	printf("double out : %lf\n", d);
+	return ((int16_t)(d * USHRT_MAX));
 }
 
 void		reload_samples(t_samples *samples, t_nnet *nn)
@@ -23,7 +25,7 @@ void		reload_samples(t_samples *samples, t_nnet *nn)
 	while (i-- - 1)
 	{
 		samples->src[i] = samples->gen[i];
-		samples->gen[i] = map_to_int16(0.0, 1.0, nn->output[i]);
+		printf("%hd\n", (samples->gen[i] = map_to_int16(0.0, 1.0, nn->output[i])));
 	}
 	fd = open(samples->name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	write(fd, samples->wav_header, WAV_HEAD);
@@ -39,24 +41,28 @@ void		reload_cannons(t_samples *samples, t_nnet *nn)
 	int		j;
 	int		k;
 
-	i = nn->num_input;
-	j = nn->num_hidden;
+	j = nn->num_hidden + 1;
 	while (j-- - 1)
 	{
-	printf("HEY { %d }\n", j);
 		nn->sum_h[j] = nn->weight_ih[0][j];
+		//printf("sum_h : [%lf]\n", nn->sum_h[j]);
+		i = nn->num_input + 1;
 		while (i-- - 1)
 			nn->sum_h[j] += nn->input[i] * nn->weight_ih[i][j];
-		nn->hidden[j] = 1.0 / (1.0 + exp(-nn->sum_h[j]));
+		//printf("sum_h :[%lf]\n", nn->sum_h[j]);
+		//printf("hidden : [%lf]\n",(nn->hidden[j] = 1.0 / (1.0 + exp(-nn->sum_h[j]))));
 	}
-	j = nn->num_hidden;
-	k = nn->num_output;
+	k = nn->num_output + 1;
 	while (k-- - 1)
 	{
 		nn->sum_o[k] = nn->weight_ho[0][k];
+		printf("sum_o :[%lf]\n", nn->sum_o[k]);
+		j = nn->num_hidden + 1;
 		while (j-- - 1)
 			nn->sum_o[k] += nn->hidden[j] * nn->weight_ho[j][k];
 		nn->output[k] = 1.0 / (1.0 + exp(-nn->sum_o[k]));
+		printf("sum_o :[%lf]\n", nn->sum_o[k]);
+		printf("output : [%lf]\n",(nn->output[k] = 1.0 / (1.0 + exp(-nn->sum_o[k]))));
 	}
 	reload_samples(samples, nn);
 }

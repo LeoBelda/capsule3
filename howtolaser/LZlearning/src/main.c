@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define IMG_W	100
-#define IMG_H	100
+#define IMG_W	64
+#define IMG_H	43
 #define HIDDEN	1024
 #define SAMPLE	1250
 
@@ -43,6 +43,7 @@ int		main(int argc, char **argv)
 		return (1);
 	camera_init("\"Nikon DSC D80 (PTP mode)\"", argv[1]);
 	nn = init_nnet(IMG_W * IMG_H, HIDDEN, SAMPLE);
+	init_weights(nn);
 	while (count--)
 	{
 	printf("1\n");
@@ -55,5 +56,6 @@ int		main(int argc, char **argv)
 		adjust_aim(samples, nn);
 	printf("5\n");
 	}
+	printf("finishe dlol\n");
 	return (0);
 }
