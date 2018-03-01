@@ -46,6 +46,7 @@ typedef struct		s_nnet
 t_nnet			*init_nnet(size_t num_input, size_t num_hidden,
 							size_t num_output);
 t_samples		*init_samples(char *name);
+void			init_weights(t_nnet *nn);
 char			*gphoto2_command(unsigned int num);
 void			fire_lasers(char *src_sample_name, char *g2c);
 void			get_splatter_target(t_nnet *nn);

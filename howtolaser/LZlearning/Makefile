@@ -9,7 +9,8 @@ CPPFLAGS=	-Iinclude
 SRC_NAME=	main.c\
 			init_nn.c\
 			init_samples.c\
-			shoot_lasers.c\
+			init_weights.c\
+			fire_lasers.c\
 			gphoto2_command.c\
 			get_splatter_target.c\
 			reload_cannons.c\

@@ -67,5 +67,8 @@ t_nnet			*init_nnet(size_t num_input, size_t num_hidden, size_t num_output)
 	ft_bzero(nn->sum_o, sizeof(double) * (num_output + 1));
 	ft_bzero(nn->delta_h, sizeof(double) * (num_hidden + 1));
 	ft_bzero(nn->delta_o, sizeof(double) * (num_output + 1));
+	nn->eta = 0.1;
+	nn->alpha = 0.0;
+	nn->error = 0.0;
 	return (nn);
 }

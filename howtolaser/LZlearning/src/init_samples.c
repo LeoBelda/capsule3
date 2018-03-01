@@ -29,6 +29,6 @@ t_samples	*init_samples(char *name)
 	if (!(samples->gen = malloc(b.st_size - WAV_HEAD)))
 		return (NULL);
 	read(fd, samples->wav_header, WAV_HEAD);
-	read(fd, samples->src, b.st_size - WAV_HEAD);
+	printf("read [ %ld ] samples from file\n", read(fd, samples->src, b.st_size - WAV_HEAD));
 	return (samples);
 }
