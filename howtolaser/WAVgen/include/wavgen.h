@@ -40,6 +40,7 @@
 # define MAX_NBFREQS 1
 
 # define NB_BCI 5
+# define NB_FREQS 4
 
 enum	e_err
 {
@@ -68,6 +69,7 @@ typedef struct	s_env
 
 	float		freq1;
 	float		freq2;
+	float		freqs[NB_FREQS];
 
 	float		inc1;
 	float		inc2;

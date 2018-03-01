@@ -43,29 +43,51 @@ static void	close_SDL(t_env *e)
 	SDL_Quit();
 }
 
-static void		gen_audio(t_env *e, int16_t *buf, float *phases)
+static void		gen_audio(t_env *e, int16_t *buf)
 {
-	size_t	i;
-	float	steps[2];
-	float	coef;
-	float	c1, c2;
+	size_t			i, j;
+	static float	phases[NB_FREQS];
+	float			coef;
+	float			amp[NB_FREQS];
 
 	i = 0;
-	steps[0] = 2 * M_PI * PERIOD_SIZE * e->freq1 / (float)SAMPLE_RATE;
-	steps[1] = 2 * M_PI * PERIOD_SIZE * e->freq2 / (float)SAMPLE_RATE;
 	while (i < PERIOD_SIZE)
 	{
+		j = 0;
 		coef = (float)i / PERIOD_SIZE;
-		c1 =  ((1 - coef) * e->prev_bci[1] + coef * e->data_bci[1]) * 0.5;
-		c2 =  ((1 - coef) * e->prev_bci[3] + coef * e->data_bci[3]) * 0.5;
-		buf[i] = e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
-				e->freq1, c1 * 0.5, phases[0]) * SHRT_MAX;
-		buf[i] += e->funcs[e->freq2_select]((float)i / (float)SAMPLE_RATE,
-				e->freq2, c2 * 0.5, phases[1]) * SHRT_MAX;
+		buf[i] = 0;
+		while (j < NB_FREQS)
+		{
+			amp[j] = 
+				((1 - coef) * e->prev_bci[j] + coef * e->data_bci[j]) * 0.5;
+			buf[i] +=
+				e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
+				e->freqs[j], 1. / NB_FREQS, phases[j]) * SHRT_MAX;
+			j++;
+		}
+	//	
+	//	buf[i] = e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
+	//			e->freq1, c1 * 0.5, phases[0]) * SHRT_MAX;
+	//	buf[i] += e->funcs[e->freq2_select]((float)i / (float)SAMPLE_RATE,
+	//			e->freq1 + , c2 * 0.5, phases[1]) * SHRT_MAX;
 		i++;
 	}
-	phases[0] = fmod(phases[0] + steps[0], 2 * M_PI);
-	phases[1] = fmod(phases[1] + steps[1], 2 * M_PI);
+	j = 0;
+	while (j < NB_FREQS)
+	{
+		phases[j] = fmod(phases[j] +
+				2 * M_PI * PERIOD_SIZE * e->freqs[j] / (float)SAMPLE_RATE,
+				2 * M_PI);
+		j++;
+	}
+}
+
+static void	choose_freqs(t_env *e)
+{
+	e->freqs[0] = 100;
+	e->freqs[1] = e->freqs[0] * 0.75;
+	e->freqs[2] = e->freqs[1] * 0.75;
+	e->freqs[3] = e->freqs[2] * 0.75;
 }
 
 static void	refresh_freqs(t_env *e)
@@ -84,7 +106,7 @@ void tosc_bci(tosc_message *osc, t_env *e) {
 	size_t	i;
 
 	i = 0;
-	if ((chan = tosc_getNextInt32(osc)) != 1)
+	if ((chan = tosc_getNextInt32(osc)) != 1 )
 		return;
 	while (i < NB_BCI)
 	{
@@ -104,10 +126,10 @@ void		ps3_program(t_env *e)
 	int16_t buf[BUFFER_SIZE * BITS_PER_SAMPLE];
 	int16_t	*ptr;
 	int		cptr;
-	float	phases[2];
 
 	init_SDL(e);
 	init_alsa(e);
+	choose_freqs(e);
 
 	//
 	//OpenBCI INIT
@@ -148,7 +170,7 @@ void		ps3_program(t_env *e)
 	e->inc2 = 0;
 	e->freq1_select = 0;
 	e->freq2_select = 0;
-	while (!e->quit)
+	while (!e->quit && keepRunning)
 	{
 		handle_SDL_events(e);
 
@@ -185,7 +207,7 @@ void		ps3_program(t_env *e)
 		//
 		//
 
-		gen_audio(e, buf, phases);
+		gen_audio(e, buf);
 		cptr = PERIOD_SIZE;
 		ptr = buf;
 		while (cptr > 0)
