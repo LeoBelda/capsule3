@@ -43,6 +43,34 @@ static void	close_SDL(t_env *e)
 	SDL_Quit();
 }
 
+static void		gen_audio2(t_env *e, int16_t *buf)
+{
+	size_t			i;
+	static float	phases[NB_FREQS];
+	float			c1, c2;
+	float			coef;
+
+	i = 0;
+	while (i < PERIOD_SIZE)
+	{
+		coef = (float)i / PERIOD_SIZE;
+		c1 = 
+				((1 - coef) * e->prev_bci[1] + coef * e->data_bci[1]) * 0.5;
+		c2 = 
+				((1 - coef) * e->prev_bci[3] + coef * e->data_bci[3]) * 0.5;
+		buf[i] = e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
+				e->freq1, c1 * 0.5, phases[0]) * SHRT_MAX;
+		buf[i] += e->funcs[e->freq2_select]((float)i / (float)SAMPLE_RATE,
+				e->freq2 , c2 * 0.5, phases[1]) * SHRT_MAX;
+		i++;
+	}
+	phases[0] = fmod(phases[0] +
+			2 * M_PI * PERIOD_SIZE * e->freq1 / (float)SAMPLE_RATE,
+			2 * M_PI);
+	phases[1] = fmod(phases[1] +
+			2 * M_PI * PERIOD_SIZE * e->freq2 / (float)SAMPLE_RATE,
+			2 * M_PI);
+}
 static void		gen_audio(t_env *e, int16_t *buf)
 {
 	size_t			i, j;
@@ -100,6 +128,23 @@ static void	refresh_freqs(t_env *e)
 		e->freq2 = 106;
 }
 
+void	tosc_emg_bci(tosc_message *osc, t_env *e)
+{
+	int		chan;
+	float	amp;
+
+	//printf("Yi\n");
+	if ((chan = tosc_getNextInt32(osc)) != 1 && chan != 3)
+		return ;
+	amp = tosc_getNextFloat(osc);
+	amp = amp > 0.3 ? amp : 0.3;
+	amp = amp < 0.9 ? amp : 0.9;
+	e->prev_bci[chan] = e->data_bci[chan];
+	e->data_bci[chan] = amp;
+	e->data_bci[chan] = (e->data_bci[chan] > 1) ? 1: e->data_bci[chan];
+	printf("chan:%d	val:%f\n", chan, amp);
+}
+
 void tosc_bci(tosc_message *osc, t_env *e) {
 	uint32_t chan;
 	float	data[NB_BCI];
@@ -111,8 +156,7 @@ void tosc_bci(tosc_message *osc, t_env *e) {
 	while (i < NB_BCI)
 	{
 		e->prev_bci[i] = e->data_bci[i];
-		e->data_bci[i] = log10(tosc_getNextFloat(osc) + 1);
-		e->data_bci[i] /= 3;
+		e->data_bci[i] = log10(tosc_getNextFloat(osc) + 1) / 3;
 		e->data_bci[i] = (e->data_bci[i] > 1) ? 1: e->data_bci[i];
 		i++;
 	}
@@ -198,7 +242,8 @@ void		ps3_program(t_env *e)
 				} else {
 					tosc_message osc;
 					tosc_parseMessage(&osc, buffer, len);
-					tosc_bci(&osc, e);
+					//tosc_bci(&osc, e);
+					tosc_emg_bci(&osc, e);
 				}
 			}
 		}
@@ -207,7 +252,7 @@ void		ps3_program(t_env *e)
 		//
 		//
 
-		gen_audio(e, buf);
+		gen_audio2(e, buf);
 		cptr = PERIOD_SIZE;
 		ptr = buf;
 		while (cptr > 0)
