@@ -3,7 +3,7 @@ SRCFILES=main.c \
 		 shaderz_program.c test_funcs.c \
 		 ps3_program.c events.c \
 		 waveforms.c tools.c error.c \
-		 tinyosc/oscmain.c tinyosc/tinyosc.c
+		 tinyosc/oscmain.c tinyosc/tinyosc.c osc_func.c
 SRCDIR=src/
 SRC=$(addprefix $(SRCDIR), $(SRCFILES))
 

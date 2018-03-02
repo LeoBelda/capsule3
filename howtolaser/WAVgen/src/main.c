@@ -34,21 +34,21 @@ static void	parse_args(t_env *e, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_env	*e;
+	t_env	e;
 
-	e = malloc(sizeof(t_env));
-	parse_args(e, argc, argv);
-	prep_funcs(e->funcs);
-	switch (e->mode)
+	bzero(&e, sizeof(t_env));
+	parse_args(&e, argc, argv);
+	prep_funcs(e.funcs);
+	switch (e.mode)
 	{
 		case M_MACHINE:
-			machine_program(e);
+			machine_program(&e);
 			break;
 		case M_SHADERZ:
-			shaderz_program(e);
+			shaderz_program(&e);
 			break;
 		case M_PS3:
-			ps3_program(e);
+			ps3_program(&e);
 			break;
 		default:
 			break;

@@ -175,6 +175,9 @@ void		ps3_program(t_env *e)
 	init_alsa(e);
 	choose_freqs(e);
 
+	test_osc();
+	exit(0);
+
 	//
 	//OpenBCI INIT
 	//

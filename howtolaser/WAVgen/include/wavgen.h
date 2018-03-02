@@ -134,5 +134,7 @@ float			gen_fuck(float t, float freq, float a, float phase);
 void			error_exit(char *err_str, enum e_err type);
 void			usage_exit(void);
 
+//OSC STUFF
+void			test_osc();
 	
 #endif
