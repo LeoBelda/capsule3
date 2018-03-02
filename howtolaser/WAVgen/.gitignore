@@ -2,3 +2,4 @@
 *.o
 WAVgen
 shaderz/*.wav
+*.out

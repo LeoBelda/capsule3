@@ -1,10 +1,10 @@
 # Makefile to build and install the SDL library
 
 top_builddir = .
-srcdir  = /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources
+srcdir  = /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources
 objects = build
 gen = gen
-prefix = /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/..
+prefix = /usr/local
 exec_prefix = ${prefix}
 bindir	= ${exec_prefix}/bin
 libdir  = ${exec_prefix}/lib
@@ -19,9 +19,9 @@ distfile = $(distdir).tar.gz
 
 SHELL	= /bin/bash
 CC      = gcc
-INCLUDE = -Iinclude -I/home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/include -idirafter /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/khronos
+INCLUDE = -Iinclude -I/home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/include -idirafter /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/khronos
 CFLAGS  = -g -O3 -DUSING_GENERATED_CONFIG_H
-EXTRA_CFLAGS = -Iinclude -I/home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/include -idirafter /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/khronos  -mmmx -m3dnow -msse -msse2 -msse3 -Wall -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement  -D_REENTRANT -DHAVE_LINUX_VERSION_H
+EXTRA_CFLAGS = -Iinclude -I/home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/include -idirafter /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/khronos  -mmmx -m3dnow -msse -msse2 -msse3 -Wall -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement    -D_REENTRANT -DHAVE_LINUX_VERSION_H
 LDFLAGS = 
 EXTRA_LDFLAGS =  -Wl,--no-undefined -lm -ldl -lpthread -lrt
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
@@ -31,7 +31,7 @@ RANLIB	= ranlib
 WINDRES	= :
 
 TARGET  = libSDL2.la
-OBJECTS = $(objects)/SDL.lo $(objects)/SDL_assert.lo $(objects)/SDL_dataqueue.lo $(objects)/SDL_error.lo $(objects)/SDL_hints.lo $(objects)/SDL_log.lo $(objects)/SDL_atomic.lo $(objects)/SDL_spinlock.lo $(objects)/SDL_audio.lo $(objects)/SDL_audiocvt.lo $(objects)/SDL_audiodev.lo $(objects)/SDL_audiotypecvt.lo $(objects)/SDL_mixer.lo $(objects)/SDL_wave.lo $(objects)/SDL_cpuinfo.lo $(objects)/SDL_dynapi.lo $(objects)/SDL_clipboardevents.lo $(objects)/SDL_dropevents.lo $(objects)/SDL_events.lo $(objects)/SDL_gesture.lo $(objects)/SDL_keyboard.lo $(objects)/SDL_mouse.lo $(objects)/SDL_quit.lo $(objects)/SDL_touch.lo $(objects)/SDL_windowevents.lo $(objects)/SDL_rwops.lo $(objects)/SDL_haptic.lo $(objects)/SDL_gamecontroller.lo $(objects)/SDL_joystick.lo $(objects)/e_atan2.lo $(objects)/e_log.lo $(objects)/e_pow.lo $(objects)/e_rem_pio2.lo $(objects)/e_sqrt.lo $(objects)/k_cos.lo $(objects)/k_rem_pio2.lo $(objects)/k_sin.lo $(objects)/k_tan.lo $(objects)/s_atan.lo $(objects)/s_copysign.lo $(objects)/s_cos.lo $(objects)/s_fabs.lo $(objects)/s_floor.lo $(objects)/s_scalbn.lo $(objects)/s_sin.lo $(objects)/s_tan.lo $(objects)/SDL_power.lo $(objects)/SDL_d3dmath.lo $(objects)/SDL_render.lo $(objects)/SDL_yuv_mmx.lo $(objects)/SDL_yuv_sw.lo $(objects)/SDL_render_d3d.lo $(objects)/SDL_render_d3d11.lo $(objects)/SDL_render_gl.lo $(objects)/SDL_shaders_gl.lo $(objects)/SDL_render_gles.lo $(objects)/SDL_render_gles2.lo $(objects)/SDL_shaders_gles2.lo $(objects)/SDL_render_psp.lo $(objects)/SDL_blendfillrect.lo $(objects)/SDL_blendline.lo $(objects)/SDL_blendpoint.lo $(objects)/SDL_drawline.lo $(objects)/SDL_drawpoint.lo $(objects)/SDL_render_sw.lo $(objects)/SDL_rotate.lo $(objects)/SDL_getenv.lo $(objects)/SDL_iconv.lo $(objects)/SDL_malloc.lo $(objects)/SDL_qsort.lo $(objects)/SDL_stdlib.lo $(objects)/SDL_string.lo $(objects)/SDL_thread.lo $(objects)/SDL_timer.lo $(objects)/SDL_RLEaccel.lo $(objects)/SDL_blit.lo $(objects)/SDL_blit_0.lo $(objects)/SDL_blit_1.lo $(objects)/SDL_blit_A.lo $(objects)/SDL_blit_N.lo $(objects)/SDL_blit_auto.lo $(objects)/SDL_blit_copy.lo $(objects)/SDL_blit_slow.lo $(objects)/SDL_bmp.lo $(objects)/SDL_clipboard.lo $(objects)/SDL_egl.lo $(objects)/SDL_fillrect.lo $(objects)/SDL_pixels.lo $(objects)/SDL_rect.lo $(objects)/SDL_shape.lo $(objects)/SDL_stretch.lo $(objects)/SDL_surface.lo $(objects)/SDL_video.lo $(objects)/SDL_vulkan_utils.lo $(objects)/SDL_nullevents.lo $(objects)/SDL_nullframebuffer.lo $(objects)/SDL_nullvideo.lo $(objects)/SDL_diskaudio.lo $(objects)/SDL_dummyaudio.lo $(objects)/SDL_sysloadso.lo $(objects)/SDL_dspaudio.lo $(objects)/SDL_x11clipboard.lo $(objects)/SDL_x11dyn.lo $(objects)/SDL_x11events.lo $(objects)/SDL_x11framebuffer.lo $(objects)/SDL_x11keyboard.lo $(objects)/SDL_x11messagebox.lo $(objects)/SDL_x11modes.lo $(objects)/SDL_x11mouse.lo $(objects)/SDL_x11opengl.lo $(objects)/SDL_x11opengles.lo $(objects)/SDL_x11shape.lo $(objects)/SDL_x11touch.lo $(objects)/SDL_x11video.lo $(objects)/SDL_x11vulkan.lo $(objects)/SDL_x11window.lo $(objects)/SDL_x11xinput2.lo $(objects)/edid-parse.lo $(objects)/imKStoUCS.lo $(objects)/SDL_ime.lo $(objects)/SDL_systhread.lo $(objects)/SDL_syssem.lo $(objects)/SDL_sysmutex.lo $(objects)/SDL_syscond.lo $(objects)/SDL_systls.lo $(objects)/SDL_sysjoystick.lo $(objects)/SDL_steamcontroller.lo $(objects)/SDL_syshaptic.lo $(objects)/SDL_syspower.lo $(objects)/SDL_sysfilesystem.lo $(objects)/SDL_systimer.lo $(objects)/SDL_evdev.lo $(objects)/SDL_evdev_kbd.lo $(objects)/SDL_poll.lo
+OBJECTS = $(objects)/SDL.lo $(objects)/SDL_assert.lo $(objects)/SDL_dataqueue.lo $(objects)/SDL_error.lo $(objects)/SDL_hints.lo $(objects)/SDL_log.lo $(objects)/SDL_atomic.lo $(objects)/SDL_spinlock.lo $(objects)/SDL_audio.lo $(objects)/SDL_audiocvt.lo $(objects)/SDL_audiodev.lo $(objects)/SDL_audiotypecvt.lo $(objects)/SDL_mixer.lo $(objects)/SDL_wave.lo $(objects)/SDL_cpuinfo.lo $(objects)/SDL_dynapi.lo $(objects)/SDL_clipboardevents.lo $(objects)/SDL_dropevents.lo $(objects)/SDL_events.lo $(objects)/SDL_gesture.lo $(objects)/SDL_keyboard.lo $(objects)/SDL_mouse.lo $(objects)/SDL_quit.lo $(objects)/SDL_touch.lo $(objects)/SDL_windowevents.lo $(objects)/SDL_rwops.lo $(objects)/SDL_haptic.lo $(objects)/SDL_gamecontroller.lo $(objects)/SDL_joystick.lo $(objects)/e_atan2.lo $(objects)/e_log.lo $(objects)/e_pow.lo $(objects)/e_rem_pio2.lo $(objects)/e_sqrt.lo $(objects)/k_cos.lo $(objects)/k_rem_pio2.lo $(objects)/k_sin.lo $(objects)/k_tan.lo $(objects)/s_atan.lo $(objects)/s_copysign.lo $(objects)/s_cos.lo $(objects)/s_fabs.lo $(objects)/s_floor.lo $(objects)/s_scalbn.lo $(objects)/s_sin.lo $(objects)/s_tan.lo $(objects)/SDL_power.lo $(objects)/SDL_d3dmath.lo $(objects)/SDL_render.lo $(objects)/SDL_yuv_mmx.lo $(objects)/SDL_yuv_sw.lo $(objects)/SDL_render_d3d.lo $(objects)/SDL_render_d3d11.lo $(objects)/SDL_render_gl.lo $(objects)/SDL_shaders_gl.lo $(objects)/SDL_render_gles.lo $(objects)/SDL_render_gles2.lo $(objects)/SDL_shaders_gles2.lo $(objects)/SDL_render_psp.lo $(objects)/SDL_blendfillrect.lo $(objects)/SDL_blendline.lo $(objects)/SDL_blendpoint.lo $(objects)/SDL_drawline.lo $(objects)/SDL_drawpoint.lo $(objects)/SDL_render_sw.lo $(objects)/SDL_rotate.lo $(objects)/SDL_getenv.lo $(objects)/SDL_iconv.lo $(objects)/SDL_malloc.lo $(objects)/SDL_qsort.lo $(objects)/SDL_stdlib.lo $(objects)/SDL_string.lo $(objects)/SDL_thread.lo $(objects)/SDL_timer.lo $(objects)/SDL_RLEaccel.lo $(objects)/SDL_blit.lo $(objects)/SDL_blit_0.lo $(objects)/SDL_blit_1.lo $(objects)/SDL_blit_A.lo $(objects)/SDL_blit_N.lo $(objects)/SDL_blit_auto.lo $(objects)/SDL_blit_copy.lo $(objects)/SDL_blit_slow.lo $(objects)/SDL_bmp.lo $(objects)/SDL_clipboard.lo $(objects)/SDL_egl.lo $(objects)/SDL_fillrect.lo $(objects)/SDL_pixels.lo $(objects)/SDL_rect.lo $(objects)/SDL_shape.lo $(objects)/SDL_stretch.lo $(objects)/SDL_surface.lo $(objects)/SDL_video.lo $(objects)/SDL_vulkan_utils.lo $(objects)/SDL_nullevents.lo $(objects)/SDL_nullframebuffer.lo $(objects)/SDL_nullvideo.lo $(objects)/SDL_diskaudio.lo $(objects)/SDL_dummyaudio.lo $(objects)/SDL_sysloadso.lo $(objects)/SDL_dspaudio.lo $(objects)/SDL_alsa_audio.lo $(objects)/SDL_jackaudio.lo $(objects)/SDL_x11clipboard.lo $(objects)/SDL_x11dyn.lo $(objects)/SDL_x11events.lo $(objects)/SDL_x11framebuffer.lo $(objects)/SDL_x11keyboard.lo $(objects)/SDL_x11messagebox.lo $(objects)/SDL_x11modes.lo $(objects)/SDL_x11mouse.lo $(objects)/SDL_x11opengl.lo $(objects)/SDL_x11opengles.lo $(objects)/SDL_x11shape.lo $(objects)/SDL_x11touch.lo $(objects)/SDL_x11video.lo $(objects)/SDL_x11vulkan.lo $(objects)/SDL_x11window.lo $(objects)/SDL_x11xinput2.lo $(objects)/edid-parse.lo $(objects)/imKStoUCS.lo $(objects)/SDL_ime.lo $(objects)/SDL_systhread.lo $(objects)/SDL_syssem.lo $(objects)/SDL_sysmutex.lo $(objects)/SDL_syscond.lo $(objects)/SDL_systls.lo $(objects)/SDL_sysjoystick.lo $(objects)/SDL_steamcontroller.lo $(objects)/SDL_syshaptic.lo $(objects)/SDL_syspower.lo $(objects)/SDL_sysfilesystem.lo $(objects)/SDL_systimer.lo $(objects)/SDL_evdev.lo $(objects)/SDL_evdev_kbd.lo $(objects)/SDL_poll.lo
 GEN_HEADERS = 
 GEN_OBJECTS = 
 VERSION_OBJECTS = 
@@ -242,444 +242,450 @@ rpm: $(distfile)
 -include $(OBJECTS:.lo=.d)
 
 # Special dependency for SDL.c, since it depends on SDL_revision.h
-/home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL.c: update-revision
+/home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL.c: update-revision
 
-$(objects)/SDL.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL.c
+$(objects)/SDL.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_assert.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL_assert.c
+$(objects)/SDL_assert.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL_assert.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dataqueue.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL_dataqueue.c
+$(objects)/SDL_dataqueue.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL_dataqueue.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_error.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL_error.c
+$(objects)/SDL_error.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL_error.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_hints.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL_hints.c
+$(objects)/SDL_hints.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL_hints.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_log.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/SDL_log.c
+$(objects)/SDL_log.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/SDL_log.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_atomic.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/atomic/SDL_atomic.c
+$(objects)/SDL_atomic.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/atomic/SDL_atomic.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_spinlock.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/atomic/SDL_spinlock.c
+$(objects)/SDL_spinlock.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/atomic/SDL_spinlock.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audio.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/SDL_audio.c
+$(objects)/SDL_audio.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/SDL_audio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audiocvt.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/SDL_audiocvt.c
+$(objects)/SDL_audiocvt.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/SDL_audiocvt.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audiodev.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/SDL_audiodev.c
+$(objects)/SDL_audiodev.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/SDL_audiodev.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audiotypecvt.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/SDL_audiotypecvt.c
+$(objects)/SDL_audiotypecvt.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/SDL_audiotypecvt.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_mixer.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/SDL_mixer.c
+$(objects)/SDL_mixer.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/SDL_mixer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_wave.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/SDL_wave.c
+$(objects)/SDL_wave.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/SDL_wave.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cpuinfo.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/cpuinfo/SDL_cpuinfo.c
+$(objects)/SDL_cpuinfo.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/cpuinfo/SDL_cpuinfo.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dynapi.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/dynapi/SDL_dynapi.c
+$(objects)/SDL_dynapi.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/dynapi/SDL_dynapi.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_clipboardevents.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_clipboardevents.c
+$(objects)/SDL_clipboardevents.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_clipboardevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dropevents.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_dropevents.c
+$(objects)/SDL_dropevents.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_dropevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_events.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_events.c
+$(objects)/SDL_events.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_events.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_gesture.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_gesture.c
+$(objects)/SDL_gesture.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_gesture.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_keyboard.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_keyboard.c
+$(objects)/SDL_keyboard.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_keyboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_mouse.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_mouse.c
+$(objects)/SDL_mouse.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_mouse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_quit.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_quit.c
+$(objects)/SDL_quit.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_quit.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_touch.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_touch.c
+$(objects)/SDL_touch.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_touch.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_windowevents.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/events/SDL_windowevents.c
+$(objects)/SDL_windowevents.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/events/SDL_windowevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rwops.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/file/SDL_rwops.c
+$(objects)/SDL_rwops.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/file/SDL_rwops.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_haptic.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/haptic/SDL_haptic.c
+$(objects)/SDL_haptic.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/haptic/SDL_haptic.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_gamecontroller.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/joystick/SDL_gamecontroller.c
+$(objects)/SDL_gamecontroller.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/joystick/SDL_gamecontroller.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_joystick.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/joystick/SDL_joystick.c
+$(objects)/SDL_joystick.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/joystick/SDL_joystick.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_atan2.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/e_atan2.c
+$(objects)/e_atan2.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/e_atan2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_log.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/e_log.c
+$(objects)/e_log.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/e_log.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_pow.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/e_pow.c
+$(objects)/e_pow.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/e_pow.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_rem_pio2.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/e_rem_pio2.c
+$(objects)/e_rem_pio2.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/e_rem_pio2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_sqrt.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/e_sqrt.c
+$(objects)/e_sqrt.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/e_sqrt.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_cos.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/k_cos.c
+$(objects)/k_cos.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/k_cos.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_rem_pio2.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/k_rem_pio2.c
+$(objects)/k_rem_pio2.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/k_rem_pio2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_sin.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/k_sin.c
+$(objects)/k_sin.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/k_sin.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_tan.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/k_tan.c
+$(objects)/k_tan.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/k_tan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_atan.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_atan.c
+$(objects)/s_atan.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_atan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_copysign.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_copysign.c
+$(objects)/s_copysign.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_copysign.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_cos.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_cos.c
+$(objects)/s_cos.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_cos.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_fabs.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_fabs.c
+$(objects)/s_fabs.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_fabs.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_floor.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_floor.c
+$(objects)/s_floor.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_floor.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_scalbn.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_scalbn.c
+$(objects)/s_scalbn.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_scalbn.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_sin.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_sin.c
+$(objects)/s_sin.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_sin.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_tan.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/libm/s_tan.c
+$(objects)/s_tan.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/libm/s_tan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_power.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/power/SDL_power.c
+$(objects)/SDL_power.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/power/SDL_power.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_d3dmath.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/SDL_d3dmath.c
+$(objects)/SDL_d3dmath.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/SDL_d3dmath.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/SDL_render.c
+$(objects)/SDL_render.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/SDL_render.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_yuv_mmx.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/SDL_yuv_mmx.c
+$(objects)/SDL_yuv_mmx.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/SDL_yuv_mmx.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_yuv_sw.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/SDL_yuv_sw.c
+$(objects)/SDL_yuv_sw.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/SDL_yuv_sw.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_d3d.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/direct3d/SDL_render_d3d.c
+$(objects)/SDL_render_d3d.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/direct3d/SDL_render_d3d.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_d3d11.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/direct3d11/SDL_render_d3d11.c
+$(objects)/SDL_render_d3d11.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/direct3d11/SDL_render_d3d11.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_gl.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/opengl/SDL_render_gl.c
+$(objects)/SDL_render_gl.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/opengl/SDL_render_gl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_shaders_gl.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/opengl/SDL_shaders_gl.c
+$(objects)/SDL_shaders_gl.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/opengl/SDL_shaders_gl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_gles.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/opengles/SDL_render_gles.c
+$(objects)/SDL_render_gles.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/opengles/SDL_render_gles.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_gles2.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/opengles2/SDL_render_gles2.c
+$(objects)/SDL_render_gles2.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/opengles2/SDL_render_gles2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_shaders_gles2.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/opengles2/SDL_shaders_gles2.c
+$(objects)/SDL_shaders_gles2.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/opengles2/SDL_shaders_gles2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_psp.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/psp/SDL_render_psp.c
+$(objects)/SDL_render_psp.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/psp/SDL_render_psp.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blendfillrect.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_blendfillrect.c
+$(objects)/SDL_blendfillrect.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_blendfillrect.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blendline.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_blendline.c
+$(objects)/SDL_blendline.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_blendline.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blendpoint.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_blendpoint.c
+$(objects)/SDL_blendpoint.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_blendpoint.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_drawline.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_drawline.c
+$(objects)/SDL_drawline.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_drawline.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_drawpoint.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_drawpoint.c
+$(objects)/SDL_drawpoint.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_drawpoint.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_sw.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_render_sw.c
+$(objects)/SDL_render_sw.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_render_sw.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rotate.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/render/software/SDL_rotate.c
+$(objects)/SDL_rotate.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/render/software/SDL_rotate.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_getenv.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/stdlib/SDL_getenv.c
+$(objects)/SDL_getenv.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/stdlib/SDL_getenv.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_iconv.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/stdlib/SDL_iconv.c
+$(objects)/SDL_iconv.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/stdlib/SDL_iconv.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_malloc.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/stdlib/SDL_malloc.c
+$(objects)/SDL_malloc.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/stdlib/SDL_malloc.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_qsort.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/stdlib/SDL_qsort.c
+$(objects)/SDL_qsort.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/stdlib/SDL_qsort.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_stdlib.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/stdlib/SDL_stdlib.c
+$(objects)/SDL_stdlib.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/stdlib/SDL_stdlib.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_string.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/stdlib/SDL_string.c
+$(objects)/SDL_string.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/stdlib/SDL_string.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_thread.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/thread/SDL_thread.c
+$(objects)/SDL_thread.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/thread/SDL_thread.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_timer.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/timer/SDL_timer.c
+$(objects)/SDL_timer.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/timer/SDL_timer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_RLEaccel.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_RLEaccel.c
+$(objects)/SDL_RLEaccel.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_RLEaccel.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit.c
+$(objects)/SDL_blit.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_0.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_0.c
+$(objects)/SDL_blit_0.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_0.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_1.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_1.c
+$(objects)/SDL_blit_1.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_1.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_A.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_A.c
+$(objects)/SDL_blit_A.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_A.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_N.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_N.c
+$(objects)/SDL_blit_N.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_N.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_auto.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_auto.c
+$(objects)/SDL_blit_auto.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_auto.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_copy.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_copy.c
+$(objects)/SDL_blit_copy.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_copy.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_slow.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_blit_slow.c
+$(objects)/SDL_blit_slow.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_blit_slow.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_bmp.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_bmp.c
+$(objects)/SDL_bmp.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_bmp.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_clipboard.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_clipboard.c
+$(objects)/SDL_clipboard.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_clipboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_egl.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_egl.c
+$(objects)/SDL_egl.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_egl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_fillrect.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_fillrect.c
+$(objects)/SDL_fillrect.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_fillrect.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_pixels.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_pixels.c
+$(objects)/SDL_pixels.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_pixels.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rect.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_rect.c
+$(objects)/SDL_rect.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_rect.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_shape.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_shape.c
+$(objects)/SDL_shape.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_shape.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_stretch.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_stretch.c
+$(objects)/SDL_stretch.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_stretch.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_surface.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_surface.c
+$(objects)/SDL_surface.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_surface.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_video.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_video.c
+$(objects)/SDL_video.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_video.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_vulkan_utils.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/SDL_vulkan_utils.c
+$(objects)/SDL_vulkan_utils.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/SDL_vulkan_utils.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_nullevents.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/dummy/SDL_nullevents.c
+$(objects)/SDL_nullevents.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/dummy/SDL_nullevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_nullframebuffer.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/dummy/SDL_nullframebuffer.c
+$(objects)/SDL_nullframebuffer.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/dummy/SDL_nullframebuffer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_nullvideo.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/dummy/SDL_nullvideo.c
+$(objects)/SDL_nullvideo.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/dummy/SDL_nullvideo.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_diskaudio.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/disk/SDL_diskaudio.c
+$(objects)/SDL_diskaudio.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/disk/SDL_diskaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dummyaudio.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/dummy/SDL_dummyaudio.c
+$(objects)/SDL_dummyaudio.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/dummy/SDL_dummyaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysloadso.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/loadso/dlopen/SDL_sysloadso.c
+$(objects)/SDL_sysloadso.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/loadso/dlopen/SDL_sysloadso.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dspaudio.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/audio/dsp/SDL_dspaudio.c
+$(objects)/SDL_dspaudio.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/dsp/SDL_dspaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11clipboard.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11clipboard.c
+$(objects)/SDL_alsa_audio.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/alsa/SDL_alsa_audio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11dyn.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11dyn.c
+$(objects)/SDL_jackaudio.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/audio/jack/SDL_jackaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11events.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11events.c
+$(objects)/SDL_x11clipboard.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11clipboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11framebuffer.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11framebuffer.c
+$(objects)/SDL_x11dyn.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11dyn.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11keyboard.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11keyboard.c
+$(objects)/SDL_x11events.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11events.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11messagebox.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11messagebox.c
+$(objects)/SDL_x11framebuffer.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11framebuffer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11modes.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11modes.c
+$(objects)/SDL_x11keyboard.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11keyboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11mouse.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11mouse.c
+$(objects)/SDL_x11messagebox.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11messagebox.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11opengl.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11opengl.c
+$(objects)/SDL_x11modes.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11modes.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11opengles.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11opengles.c
+$(objects)/SDL_x11mouse.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11mouse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11shape.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11shape.c
+$(objects)/SDL_x11opengl.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11opengl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11touch.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11touch.c
+$(objects)/SDL_x11opengles.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11opengles.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11video.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11video.c
+$(objects)/SDL_x11shape.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11shape.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11vulkan.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11vulkan.c
+$(objects)/SDL_x11touch.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11touch.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11window.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11window.c
+$(objects)/SDL_x11video.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11video.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_x11xinput2.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/SDL_x11xinput2.c
+$(objects)/SDL_x11vulkan.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11vulkan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/edid-parse.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/edid-parse.c
+$(objects)/SDL_x11window.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11window.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/imKStoUCS.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/video/x11/imKStoUCS.c
+$(objects)/SDL_x11xinput2.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/SDL_x11xinput2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_ime.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/core/linux/SDL_ime.c
+$(objects)/edid-parse.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/edid-parse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_systhread.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/thread/pthread/SDL_systhread.c
+$(objects)/imKStoUCS.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/video/x11/imKStoUCS.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syssem.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/thread/pthread/SDL_syssem.c
+$(objects)/SDL_ime.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/core/linux/SDL_ime.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysmutex.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/thread/pthread/SDL_sysmutex.c
+$(objects)/SDL_systhread.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/thread/pthread/SDL_systhread.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syscond.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/thread/pthread/SDL_syscond.c
+$(objects)/SDL_syssem.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/thread/pthread/SDL_syssem.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_systls.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/thread/pthread/SDL_systls.c
+$(objects)/SDL_sysmutex.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/thread/pthread/SDL_sysmutex.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysjoystick.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/joystick/linux/SDL_sysjoystick.c
+$(objects)/SDL_syscond.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/thread/pthread/SDL_syscond.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_steamcontroller.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/joystick/steam/SDL_steamcontroller.c
+$(objects)/SDL_systls.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/thread/pthread/SDL_systls.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syshaptic.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/haptic/linux/SDL_syshaptic.c
+$(objects)/SDL_sysjoystick.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/joystick/linux/SDL_sysjoystick.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syspower.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/power/linux/SDL_syspower.c
+$(objects)/SDL_steamcontroller.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/joystick/steam/SDL_steamcontroller.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysfilesystem.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/filesystem/unix/SDL_sysfilesystem.c
+$(objects)/SDL_syshaptic.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/haptic/linux/SDL_syshaptic.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_systimer.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/timer/unix/SDL_systimer.c
+$(objects)/SDL_syspower.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/power/linux/SDL_syspower.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_evdev.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/core/linux/SDL_evdev.c
+$(objects)/SDL_sysfilesystem.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/filesystem/unix/SDL_sysfilesystem.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_evdev_kbd.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/core/linux/SDL_evdev_kbd.c
+$(objects)/SDL_systimer.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/timer/unix/SDL_systimer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_poll.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/core/unix/SDL_poll.c
+$(objects)/SDL_evdev.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/core/linux/SDL_evdev.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
+$(objects)/SDL_evdev_kbd.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/core/linux/SDL_evdev_kbd.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_poll.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/core/unix/SDL_poll.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
 
-$(objects)/SDL_dummy_main.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/main/dummy/SDL_dummy_main.c
+$(objects)/SDL_dummy_main.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/main/dummy/SDL_dummy_main.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_test_assert.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_assert.c
+$(objects)/SDL_test_assert.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_assert.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_common.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_common.c
+$(objects)/SDL_test_common.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_common.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_compare.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_compare.c
+$(objects)/SDL_test_compare.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_compare.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_crc32.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_crc32.c
+$(objects)/SDL_test_crc32.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_crc32.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_font.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_font.c
+$(objects)/SDL_test_font.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_font.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_fuzzer.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_fuzzer.c
+$(objects)/SDL_test_fuzzer.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_fuzzer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_harness.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_harness.c
+$(objects)/SDL_test_harness.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_harness.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imageBlit.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_imageBlit.c
+$(objects)/SDL_test_imageBlit.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_imageBlit.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imageBlitBlend.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_imageBlitBlend.c
+$(objects)/SDL_test_imageBlitBlend.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_imageBlitBlend.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imageFace.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_imageFace.c
+$(objects)/SDL_test_imageFace.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_imageFace.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imagePrimitives.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_imagePrimitives.c
+$(objects)/SDL_test_imagePrimitives.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_imagePrimitives.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imagePrimitivesBlend.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_imagePrimitivesBlend.c
+$(objects)/SDL_test_imagePrimitivesBlend.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_imagePrimitivesBlend.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_log.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_log.c
+$(objects)/SDL_test_log.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_log.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_md5.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_md5.c
+$(objects)/SDL_test_md5.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_md5.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_memory.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_memory.c
+$(objects)/SDL_test_memory.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_memory.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_random.lo: /home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/src/test/SDL_test_random.c
+$(objects)/SDL_test_random.lo: /home/lapin/Documents/THE_CAPSULE/laser_capsule/howtolaser/WAVgen/libs/SDL2/sources/src/test/SDL_test_random.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 

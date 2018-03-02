@@ -1,6 +1,6 @@
 # sdl pkg-config source file
 
-prefix=/home/leo/workspace/projects/fdf/libs/SDL2-2.0.7/sources/..
+prefix=/usr/local
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
