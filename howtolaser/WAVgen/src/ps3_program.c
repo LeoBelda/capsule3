@@ -3,9 +3,9 @@
 
 static volatile bool keepRunning = true;
 
-static void sigintHandler(int x) {
-  keepRunning = false;
-}
+//static void sigintHandler(int x) {
+//  keepRunning = false;
+//}
 
 static void	init_SDL(t_env *e)
 {
@@ -175,7 +175,7 @@ void		ps3_program(t_env *e)
 	init_alsa(e);
 	choose_freqs(e);
 
-	test_osc();
+	test_osc(e);
 	exit(0);
 
 	//

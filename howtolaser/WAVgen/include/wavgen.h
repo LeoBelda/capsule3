@@ -90,6 +90,9 @@ typedef struct	s_env
 	uint16_t	*rand_freqs;
 	uint16_t	*rand_waves;
 	float		*rand_phases;
+
+	//osc protocol elements
+	int		osc_fd;
 }				t_env;
 
 //INIT STUFF
