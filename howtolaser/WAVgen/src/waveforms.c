@@ -28,7 +28,7 @@ float	gen_sawtooth(float t, float freq, float a, float phase)
 
 float	curv_sin(float time, t_acurv *curv)
 {
-	return (curv->amp * sin(time * 2 * M_PI + curv->phase));
+	return (curv->amp * sin(time * 2 * M_PI * curv->freq + curv->phase));
 }
 
 float	curv_tri(float time, t_acurv *curv)

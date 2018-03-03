@@ -134,6 +134,9 @@ float			gen_rand_rand(float t, t_env *e);
 
 //void			waveforme_init(float (*f)(float time, t_acurv *curv));
 void	waveforme_init(float (*f[NB_WAVEFORMS])(float time, t_acurv *curv));
+void	test_osc_handler(tosc_message *osc, void *data);
+void	osc_get_message(t_env *e, void (*f)(tosc_message *, void *));
+void	osc_init(t_env *e, int port);
 
 //SHADERZ STUFF
 void			shaderz_program(t_env *e);

@@ -93,11 +93,12 @@ static void		gen_audio(t_env *e, int16_t *buf)
 		time = (float)i / SAMPLE_RATE;
 		while (j < e->nb_freq)
 		{
-			curv.amp = ((1 - coef) * e->crv_beg->amp) + (coef * e->crv_end->amp);
-			curv.freq = ((1 - coef) * e->crv_beg->freq) + (coef * e->crv_end->freq);
-			curv.phase = ((1 - coef) * (e->crv_beg->phase + e->crv_beg->phase_corection))
-					+ (coef * (e->crv_end->phase + e->crv_beg->phase_corection));
-			buf[i] += e->wave_form[e->freq_select[i]](time, &curv) * ratio;
+			curv.amp = ((1 - coef) * e->crv_beg[j].amp) + (coef * e->crv_end[j].amp);
+			curv.freq = ((1 - coef) * e->crv_beg[j].freq) + (coef * e->crv_end[j].freq);
+//			curv.phase = ((1 - coef) * (e->crv_beg[j].phase))
+//					+ (coef * (e->crv_end[j].phase));
+			curv.phase = e->crv_beg[j].phase;
+			buf[i] += e->wave_form[e->freq_select[j]](time, &curv) * ratio;
 			j++;
 		}
 		i++;
@@ -123,12 +124,12 @@ static void	choose_freqs(t_env *e)
 
 static void	refresh_freqs(t_env *e)
 {
-	e->freq1 += e->inc1;
-	e->freq2 += e->inc2;
-	if (e->freq1 > 350 || e->freq1 < 2)
-		e->freq1 = 120;
-	if (e->freq2 > 350 || e->freq2 < 2)
-		e->freq2 = 160;
+	e->crv_end[0].freq += e->inc1;
+	e->crv_end[1].freq += e->inc2;
+	if (e->crv_end[0].freq > 350 || e->crv_end[0].freq < 2)
+		e->crv_end[0].freq = 120;
+	if (e->crv_end[1].freq > 350 || e->crv_end[1].freq < 2)
+		e->crv_end[1].freq = 160;
 }
 
 void	tosc_emg_bci(tosc_message *osc, t_env *e)
@@ -173,6 +174,7 @@ void		ps3_program_init(t_env *e)
 	init_alsa(e);
 	choose_freqs(e);
 	waveforme_init(e->wave_form);
+	osc_init(e, 9000);
 
 //				       ||
 // cette partie va probablement sauter vv
@@ -220,6 +222,7 @@ void		ps3_program(t_env *e)
 	while (!e->quit)
 	{
 		handle_SDL_events(e);
+		osc_get_message(e, test_osc_handler);
 		// get osc_input
 		// set/adapt waveforme parameter
 		gen_audio(e, buf);

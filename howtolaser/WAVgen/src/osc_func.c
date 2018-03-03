@@ -75,7 +75,7 @@ void	osc_get_message(t_env *e, void (*f)(tosc_message *, void *))
 	else
 	{
 		static	size_t count = 0;
-		printf("TIMEOUT:%d\n", count);
+		//printf("TIMEOUT:%d\n", count);
 		count++;
 	}
 }
@@ -89,13 +89,19 @@ void	test_osc_handler(tosc_message *osc, void *data)
 	int	chan;
 	float	amp;
 
+	printf("ook\n");
 	e = (t_env*)data;
 	for (i = 0; i < BCI_CHAN_NB; i++)
 	{
-		if ((chan = tosc_getNextInt32(osc)) != 1 && chan != 3)
+		if ((chan = tosc_getNextInt32(osc)) != 1)
 			return ;
 		amp = tosc_getNextFloat(osc);
-		*((chan == 1) ? &(e->freq1) : &(e->freq2)) = amp;
+		//amp = 1 - amp;
+		amp = (amp < 0.5 ? 0.5 : amp);
+		amp = (amp > 0.97 ? 0.97 : amp);
+		e->crv_end[0].amp = amp;
+		e->crv_end[1].amp = amp;
+		//e->crv_end[1].amp = 1.;
 		printf("chan:%d	amp:%f\n", chan, amp);
 	}
 }
@@ -108,5 +114,4 @@ void	test_osc(t_env *e)
 	{
 		osc_get_message(e, test_osc_handler);
 	}
-	osc_close(e);
 }
