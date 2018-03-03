@@ -59,9 +59,9 @@ static void		gen_audio2(t_env *e, int16_t *buf)
 //		c2 = 
 //				((1 - coef) * e->prev_bci[3] + coef * e->data_bci[3]) * 0.5;
 		buf[i] = e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
-				e->freq1, 0.5, phases[0]) * SHRT_MAX;
+				e->freq1, 0.5 * e->amp1, phases[0] + e->phase1) * SHRT_MAX;
 		buf[i] += e->funcs[e->freq2_select]((float)i / (float)SAMPLE_RATE,
-				e->freq2 , 0.5, phases[1]) * SHRT_MAX;
+				e->freq2 , 0.5 * e->amp2, phases[1] + e->phase2) * SHRT_MAX;
 		i++;
 	}
 	phases[0] = fmod(phases[0] +
@@ -120,12 +120,18 @@ static void	choose_freqs(t_env *e)
 
 static void	refresh_freqs(t_env *e)
 {
-	e->freq1 += e->inc1;
-	e->freq2 += e->inc2;
+	e->freq1 += e->incf1;
+	e->freq2 += e->incf2;
+	e->amp1 += e->inca1;
+	e->amp2 += e->inca2;
 	if (e->freq1 > 350 || e->freq1 < 2)
 		e->freq1 = 120;
 	if (e->freq2 > 350 || e->freq2 < 2)
 		e->freq2 = 160;
+	e->amp1 = (e->amp1 >= 0.99 ? 0.99 : e->amp1);
+	e->amp1 = (e->amp1 <= 0.1 ? 0.1 : e->amp1);
+	e->amp2 = (e->amp2 >= 0.99 ? 0.99 : e->amp2);
+	e->amp2 = (e->amp2 <= 0.1 ? 0.1 : e->amp2);
 }
 
 void	tosc_emg_bci(tosc_message *osc, t_env *e)
@@ -208,10 +214,16 @@ void		ps3_program(t_env *e)
 	//
 	//
 
-	e->freq1 = 120.123;
-	e->freq2 = 160.878;
-	e->inc1 = 0;
-	e->inc2 = 0;
+	e->freq1 = 164.44986;
+	e->freq2 = 205.956970;
+	e->amp1 = 0.95;
+	e->amp2 = 0.95;
+	e->incf1 = 0;
+	e->incf2 = 0;
+	e->inca1 = 0;
+	e->inca2 = 0;
+	e->phase1 = 0;
+	e->phase2 = 0;
 	e->freq1_select = 0;
 	e->freq2_select = 0;
 	while (!e->quit)

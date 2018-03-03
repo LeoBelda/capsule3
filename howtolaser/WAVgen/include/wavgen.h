@@ -28,7 +28,7 @@
 # define BITS_PER_SAMPLE 16
 # define NB_CHANNELS 1
 
-# define PERIOD_SIZE 1024
+# define PERIOD_SIZE 512
 # define BUFFER_SIZE PERIOD_SIZE * 4
 
 # define HEADER_SIZE 44
@@ -69,10 +69,16 @@ typedef struct	s_env
 
 	float		freq1;
 	float		freq2;
+	float		amp1;
+	float		amp2;
 	float		freqs[NB_FREQS];
 
-	float		inc1;
-	float		inc2;
+	float		incf1;
+	float		incf2;
+	float		inca1;
+	float		inca2;
+	float		phase1;
+	float		phase2;
 
 	float		data_bci[5];
 	float		prev_bci[5];

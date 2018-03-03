@@ -43,10 +43,18 @@ void		handle_SDL_events(t_env *e)
 			printf("%fHz, %ffHz\n", e->freq1, e->freq2);
 		if (event.type == SDL_CONTROLLERAXISMOTION)
 		{
-			e->inc1 = -0.5 *
+			e->incf1 = 0.15 *
+		(float)SDL_GameControllerGetAxis(e->controller, 0) / (float)SHRT_MAX;
+			e->incf2 = 0.15 *
+		(float)SDL_GameControllerGetAxis(e->controller, 2) / (float)SHRT_MAX;
+			e->inca1 = -0.03 *
 		(float)SDL_GameControllerGetAxis(e->controller, 1) / (float)SHRT_MAX;
-			e->inc2 = -0.5 *
+			e->inca2 = -0.03 *
 		(float)SDL_GameControllerGetAxis(e->controller, 3) / (float)SHRT_MAX;
+			e->phase1 = 3 * M_PI *
+		(float)SDL_GameControllerGetAxis(e->controller, 4) / (float)SHRT_MAX;
+			e->phase2 = 3 * M_PI *
+		(float)SDL_GameControllerGetAxis(e->controller, 5) / (float)SHRT_MAX;
 		}
 		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
 			handle_button_press(e, event.cbutton.button);
