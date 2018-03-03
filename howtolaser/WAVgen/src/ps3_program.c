@@ -1,7 +1,7 @@
 #include "wavgen.h"
 #include "tinyosc.h"
 
-static volatile bool keepRunning = true;
+//volatile bool keepRunning = true;
 
 //static void sigintHandler(int x) {
 //  keepRunning = false;
@@ -71,40 +71,43 @@ static void		gen_audio2(t_env *e, int16_t *buf)
 			2 * M_PI * PERIOD_SIZE * e->freq2 / (float)SAMPLE_RATE,
 			2 * M_PI);
 }
+
+/*
+**	on va envoyer des baille de ouf trop generique ca mere. POPOPOOOOO!!
+*/
 static void		gen_audio(t_env *e, int16_t *buf)
 {
-	size_t			i, j;
-	static float	phases[NB_FREQS];
-	float			coef;
-	float			amp[NB_FREQS];
+	size_t	i, j;
+	float	coef;
+	float	time;
+	float	ratio;
+	t_acurv	curv;
 
+	ratio = (float)SHRT_MAX / e->nb_freq;
 	i = 0;
 	while (i < PERIOD_SIZE)
 	{
 		j = 0;
 		coef = (float)i / PERIOD_SIZE;
 		buf[i] = 0;
-		while (j < NB_FREQS)
+		time = (float)i / SAMPLE_RATE;
+		while (j < e->nb_freq)
 		{
-			amp[j] = 
-				((1 - coef) * e->prev_bci[j] + coef * e->data_bci[j]) * 0.5;
-			buf[i] +=
-				e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
-				e->freqs[j], 1. / NB_FREQS, phases[j]) * SHRT_MAX;
+			curv.amp = ((1 - coef) * e->crv_beg->amp) + (coef * e->crv_end->amp);
+			curv.freq = ((1 - coef) * e->crv_beg->freq) + (coef * e->crv_end->freq);
+			curv.phase = ((1 - coef) * (e->crv_beg->phase + e->crv_beg->phase_corection))
+					+ (coef * (e->crv_end->phase + e->crv_beg->phase_corection));
+			buf[i] += e->wave_form[e->freq_select[i]](time, &curv) * ratio;
 			j++;
 		}
-	//	
-	//	buf[i] = e->funcs[e->freq1_select]((float)i / (float)SAMPLE_RATE,
-	//			e->freq1, c1 * 0.5, phases[0]) * SHRT_MAX;
-	//	buf[i] += e->funcs[e->freq2_select]((float)i / (float)SAMPLE_RATE,
-	//			e->freq1 + , c2 * 0.5, phases[1]) * SHRT_MAX;
 		i++;
 	}
 	j = 0;
-	while (j < NB_FREQS)
+	while (j < e->nb_freq)
 	{
-		phases[j] = fmod(phases[j] +
-				2 * M_PI * PERIOD_SIZE * e->freqs[j] / (float)SAMPLE_RATE,
+		e->crv_beg[j] = e->crv_end[j];
+		e->crv_end[j].phase = fmod(e->crv_end[j].phase +
+				2 * M_PI * PERIOD_SIZE * e->crv_end[j].freq / (float)SAMPLE_RATE,
 				2 * M_PI);
 		j++;
 	}
@@ -164,114 +167,60 @@ void tosc_bci(tosc_message *osc, t_env *e) {
 			e->data_bci[3], e->data_bci[4]);
 }
 
-void		ps3_program(t_env *e)
+void		ps3_program_init(t_env *e)
 {
-	snd_pcm_sframes_t	frames;
-	int16_t buf[BUFFER_SIZE * BITS_PER_SAMPLE];
-	int16_t	*ptr;
-	int		cptr;
-
 	init_SDL(e);
 	init_alsa(e);
 	choose_freqs(e);
+	waveforme_init(e->wave_form);
 
-	test_osc(e);
-	exit(0);
-
-	//
-	//OpenBCI INIT
-	//
-
-//	char buffer[2048]; // declare a 2Kb buffer to read packet data into
-//
-//	printf("Starting write tests:\n");
-//	int len = 0;
-//	char blob[8] = {0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF};
-//	len = tosc_writeMessage(buffer, sizeof(buffer), "/address", "fsibTFNI",
-//			1.0f, "hello world", -1, sizeof(blob), blob);
-//	tosc_printOscBuffer(buffer, len);
-//	printf("done.\n");
-//
-//	// register the SIGINT handler (Ctrl+C)
-//	signal(SIGINT, &sigintHandler);
-//
-//	// open a socket to listen for datagrams (i.e. UDP packets) on port 9000
-//	const int fd = socket(AF_INET, SOCK_DGRAM, 0);
-//	fcntl(fd, F_SETFL, O_NONBLOCK); // set the socket to non-blocking
-//	struct sockaddr_in sin;
-//	sin.sin_family = AF_INET;
-//	sin.sin_port = htons(9000);
-//	sin.sin_addr.s_addr = INADDR_ANY;
-//	printf("addr:%d\n", INADDR_ANY);
-//	bind(fd, (struct sockaddr *) &sin, sizeof(struct sockaddr_in));
-//	printf("tinyosc is now listening on port 9000.\n");
-//	printf("Press Ctrl+C to stop.\n");
-
-	//
-	//
-	//
-
-	e->freq1 = 120.123;
+//				       ||
+// cette partie va probablement sauter vv
+//  on la garde oiur continuer a compiler
+	e->freq1 = 120.123;		
 	e->freq2 = 160.878;
 	e->inc1 = 0;
 	e->inc2 = 0;
 	e->freq1_select = 0;
 	e->freq2_select = 0;
+}
+
+void		push_sound(t_env *e, int16_t *buf, int periode_size)
+{
+	snd_pcm_sframes_t	frames;
+
+	while (periode_size > 0)
+	{
+		frames = snd_pcm_writei(e->sd_handle, buf, periode_size);
+		if (frames < 0)
+		{
+			frames = snd_pcm_recover(e->sd_handle, frames, 1);
+			if (frames < 0)
+				error_exit("Failed recovering pcm", E_FATAL);
+			break;
+		}
+		periode_size -= frames;
+		buf += frames;
+	}
+	refresh_freqs(e);
+}
+
+void		ps3_program(t_env *e)
+{
+	int16_t buf[BUFFER_SIZE * BITS_PER_SAMPLE];
+	int16_t	*ptr;
+	int		cptr;
+
+	test_osc(e);
+	exit(0);
+
 	while (!e->quit)
 	{
 		handle_SDL_events(e);
-
-		//
-		// OpenBCI LOOP
-		//
-
-//		fd_set readSet;
-//		FD_ZERO(&readSet);
-//		FD_SET(fd, &readSet);
-//		struct timeval timeout = {0, 1000}; // select times out after 1 second
-//		if (select(fd+1, &readSet, NULL, NULL, &timeout) > 0) {
-//			struct sockaddr sa; // can be safely cast to sockaddr_in
-//			socklen_t sa_len = sizeof(struct sockaddr_in);
-//			int len = 0;
-//			while ((len = (int) recvfrom(fd, buffer, sizeof(buffer), 0, &sa, &sa_len)) > 0) {
-//				if (tosc_isBundle(buffer)) {
-//					tosc_bundle bundle;
-//					tosc_parseBundle(&bundle, buffer, len);
-//					const uint64_t timetag = tosc_getTimetag(&bundle);
-//					tosc_message osc;
-//					while (tosc_getNextMessage(&bundle, &osc)) {
-//						tosc_printMessage(&osc);
-//					}
-//				} else {
-//					tosc_message osc;
-//					tosc_parseMessage(&osc, buffer, len);
-//					//tosc_bci(&osc, e);
-//					tosc_emg_bci(&osc, e);
-//				}
-//			}
-//		}
-
-		//
-		//
-		//
-
-		gen_audio2(e, buf);
-		cptr = PERIOD_SIZE;
-		ptr = buf;
-		while (cptr > 0)
-		{
-			frames = snd_pcm_writei(e->sd_handle, ptr, cptr);
-			if (frames < 0)
-			{
-				frames = snd_pcm_recover(e->sd_handle, frames, 1);
-				if (frames < 0)
-					error_exit("Failed recovering pcm", E_FATAL);
-				break;
-			}
-			cptr -= frames;
-			ptr += frames;
-		}
-		refresh_freqs(e);
+		// get osc_input
+		// set/adapt waveforme parameter
+		gen_audio(e, buf);
+		push_sound(e, buf, PERIOD_SIZE);
 	}
 	snd_pcm_close(e->sd_handle);
 	close_SDL(e);

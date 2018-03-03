@@ -1,22 +1,13 @@
 #include "tinyosc.h"
 #include "wavgen.h"
 
-//typedef	struct	s_osc
-//{
-//	int			fd;
-////	struct	sockaddr_in	sin;
-//	// buffer ?
-//}		t_osc;
 
-#define	BCI_CHAN_NB	8
-
-
+volatile bool keepRunning = true;
 void	osc_close(t_env *e)
 {
  	// close the UDP socket
  	close(e->osc_fd);
 }
-//static volatile bool keepRunning = true;
 
 // handle Ctrl+C
 static void sigintHandler(int x)
