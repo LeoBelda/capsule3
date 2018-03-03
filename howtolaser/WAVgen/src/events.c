@@ -51,9 +51,9 @@ void		handle_SDL_events(t_env *e)
 		(float)SDL_GameControllerGetAxis(e->controller, 1) / (float)SHRT_MAX;
 			e->inca2 = -0.03 *
 		(float)SDL_GameControllerGetAxis(e->controller, 3) / (float)SHRT_MAX;
-			e->phase1 = 3 * M_PI *
+			e->phase1 = 0.1 * M_PI *
 		(float)SDL_GameControllerGetAxis(e->controller, 4) / (float)SHRT_MAX;
-			e->phase2 = 3 * M_PI *
+			e->phase2 = 0.1 * M_PI *
 		(float)SDL_GameControllerGetAxis(e->controller, 5) / (float)SHRT_MAX;
 		}
 		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
