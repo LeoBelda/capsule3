@@ -179,6 +179,9 @@ void		ps3_program_init(t_env *e)
 //  on la garde oiur continuer a compiler
 	e->freq1 = 120.123;		
 	e->freq2 = 160.878;
+	e->crv_end[0].freq = e->freq1;
+	e->crv_end[1].freq = e->freq2;
+	e->nb_freq = 2;
 	e->inc1 = 0;
 	e->inc2 = 0;
 	e->freq1_select = 0;
@@ -211,9 +214,9 @@ void		ps3_program(t_env *e)
 	int16_t	*ptr;
 	int		cptr;
 
-	test_osc(e);
-	exit(0);
-
+	//test_osc(e);
+	//exit(0);
+	ps3_program_init(e);
 	while (!e->quit)
 	{
 		handle_SDL_events(e);
