@@ -24,7 +24,7 @@ void	osc_init(t_env *e, int port)
 	struct	sockaddr_in	sin;
 
   // register the SIGINT handler (Ctrl+C)
-  signal(SIGINT, &sigintHandler);
+//  signal(SIGINT, &sigintHandler);
 
 	// open a socket to listen for datagrams (i.e. UDP packets) on port 9000
 	if((e->osc_fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
@@ -75,7 +75,7 @@ void	osc_get_message(t_env *e, void (*f)(tosc_message *, void *))
 	else
 	{
 		static	size_t count = 0;
-		printf("TIMEOUT:%d\n", count);
+//		printf("TIMEOUT:%d\n", count);
 		count++;
 	}
 }

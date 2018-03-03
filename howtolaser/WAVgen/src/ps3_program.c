@@ -97,7 +97,7 @@ static void		gen_audio(t_env *e, int16_t *buf)
 			curv.freq = ((1 - coef) * e->crv_beg->freq) + (coef * e->crv_end->freq);
 			curv.phase = ((1 - coef) * (e->crv_beg->phase + e->crv_beg->phase_corection))
 					+ (coef * (e->crv_end->phase + e->crv_beg->phase_corection));
-			buf[i] += e->wave_form[e->freq_select[i]](time, &curv) * ratio;
+			buf[i] += e->wave_form[e->freq_select[j]](time, &curv) * ratio;
 			j++;
 		}
 		i++;
@@ -213,7 +213,7 @@ void		ps3_program(t_env *e)
 	int16_t buf[BUFFER_SIZE * BITS_PER_SAMPLE];
 	int16_t	*ptr;
 	int		cptr;
-
+	
 	//test_osc(e);
 	//exit(0);
 	ps3_program_init(e);
