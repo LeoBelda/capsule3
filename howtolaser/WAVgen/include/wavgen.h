@@ -42,7 +42,7 @@
 	# define NB_BCI 5
 	# define NB_FREQS 4
 
-	# define MAX_FREQ 32
+	# define MAX_FREQ 52
 
 	enum	e_err
 	{

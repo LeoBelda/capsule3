@@ -215,7 +215,7 @@ void		ps3_program(t_env *e)
 	int16_t buf[BUFFER_SIZE * BITS_PER_SAMPLE];
 	int16_t	*ptr;
 	int		cptr;
-
+	
 	//test_osc(e);
 	//exit(0);
 	ps3_program_init(e);
