@@ -11,6 +11,6 @@ void	error_exit(char *err_str, enum e_err type)
 
 void	usage_exit(void)
 {
-	printf("usage: WAVgen nb_samples_out");
+	printf("usage: WAVgen nb_samples_out\n");
 	exit(EXIT_FAILURE);
 }
