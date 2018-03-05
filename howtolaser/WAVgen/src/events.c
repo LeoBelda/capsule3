@@ -5,32 +5,44 @@ static void		handle_button_press(t_env *e, uint8_t button)
 	switch (button)
 	{
 		case SDL_CONTROLLER_BUTTON_A:
-			e->freq2_select = 0;
+			e->freq_select[1] = 0;
 			break;
 		case SDL_CONTROLLER_BUTTON_B:
-			e->freq2_select = 1;
+			e->freq_select[1] = 1;
 			break;
 		case SDL_CONTROLLER_BUTTON_X:
-			e->freq2_select = 2;
+			e->freq_select[1] = 2;
 			break;
 		case SDL_CONTROLLER_BUTTON_Y:
-			e->freq2_select = 3;
+			e->freq_select[1] = 3;
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-			e->freq1_select = 0;
+			e->freq_select[0] = 0;
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
-			e->freq1_select = 1;
+			e->freq_select[0] = 1;
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
-			e->freq1_select = 2;
+			e->freq_select[0] = 2;
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_UP:
-			e->freq1_select = 3;
+			e->freq_select[0] = 3;
 		case SDL_CONTROLLER_BUTTON_GUIDE:
 			printf("SELECT pressed\n");
 			e->bci_mode += e->bci_mode % 2;
 			break;
+	}
+}
+
+void		print_frequency(t_env *e)
+{
+	int	i;
+
+	i = 0;
+	while (i < e->curv_nb)
+	{
+		print("curve[%i]: {%f, %f}  (Hz, amp)\n", i, crv_end[i].freq, rv_end[i].amp;
+		i++;
 	}
 }
 
@@ -43,7 +55,8 @@ void		handle_SDL_events(t_env *e)
 		if (event.key.keysym.sym == SDLK_ESCAPE)
 			e->quit = 1;
 		if (event.key.keysym.sym == SDLK_f)
-			printf("%fHz, %ffHz\n", e->freq1, e->freq2);
+		//	printf("{%f, %f}Hz:amp, {%fm %f}fHz\n", e->freq1, e->freq2);
+			print_frequency(e);
 		if (event.type == SDL_CONTROLLERAXISMOTION)
 		{
 			e->inc1 = -0.5 *
