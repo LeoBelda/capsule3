@@ -96,12 +96,19 @@ void	test_osc_handler(tosc_message *osc, void *data)
 		if ((chan = tosc_getNextInt32(osc)) != 1)
 			return ;
 		amp = tosc_getNextFloat(osc);
-		//amp = 1 - amp;
-		amp = (amp < 0.5 ? 0.5 : amp);
-		amp = (amp > 0.97 ? 0.97 : amp);
+		if (e->bci_mode == 0)
+		{
+			amp = 1 - amp;
+			amp = (amp < 0.2 ? 0.2 : amp);
+			amp = (amp > 0.9 ? 0.9 : amp);
+		}
+		else
+		{
+			amp = (amp < 0.5 ? 0.5 : amp);
+			amp = (amp > 0.97 ? 0.97 : amp);
+		}
 		e->crv_end[0].amp = amp;
 		e->crv_end[1].amp = amp;
-		//e->crv_end[1].amp = 1.;
 		printf("chan:%d	amp:%f\n", chan, amp);
 	}
 }
