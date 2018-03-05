@@ -53,7 +53,7 @@ static void		handle_button_press(t_env *e, uint8_t button)
 		case SDL_CONTROLLER_BUTTON_START:
 			printf("START pressed\n");
 			ratio = 1.0 + lissajou_found_ratio(e);
-			e->crv_end[1].freQ = ((1.0 + ratio) / ratio) * e->crv_enf[0].freq;
+			e->crv_end[1].freq = ((1.0 + ratio) / ratio) * e->crv_end[0].freq;
 			break;
 
 
@@ -65,11 +65,12 @@ void		print_frequency(t_env *e)
 	int	i;
 
 	i = 0;
-	while (i < e->curv_nb)
+	while (i < e->curve_nb)
 	{
-		print("curve[%i]: {%f, %f}  (Hz, amp)\n", i, crv_end[i].freq, rv_end[i].amp;
+		printf("curve[%i]: {%f, %f}  (Hz, amp)\n", i, e->crv_end[i].freq, e->crv_end[i].amp);
 		i++;
 	}
+	printf("==\n");
 }
 
 void		handle_SDL_events(t_env *e)
