@@ -27,6 +27,9 @@ static void		handle_button_press(t_env *e, uint8_t button)
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_UP:
 			e->freq1_select = 3;
+		case SDL_CONTROLLER_BUTTON_GUIDE:
+			printf("SELECT pressed\n");
+			e->bci_mode += e->bci_mode % 2;
 			break;
 	}
 }
