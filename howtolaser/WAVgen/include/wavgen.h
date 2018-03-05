@@ -43,6 +43,7 @@
 # define NB_FREQS 4
 
 # define MAX_FREQ 52
+# define MAX_LISSAJOU 10
 
 enum	e_err
 {

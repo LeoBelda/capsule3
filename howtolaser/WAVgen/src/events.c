@@ -1,7 +1,26 @@
 #include "wavgen.h"
 
+static	int		lissajou_found_ratio(t_env *e)
+{
+	int	i;
+	float	c1, c2, ratio;
+
+	i = 0;
+	c1 = 2;
+	c2 = 1;
+	ratio = e->crv_beg[1].freq / (e->crv_beg[0].freq + 1);
+	while (i < MAX_LISSAJOU)
+	{
+		if ((c1 / c2) > ratio && ((c1 + 1) / (c2 + 1)) <= ratio)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
 static void		handle_button_press(t_env *e, uint8_t button)
 {
+	float	ratio;
 	switch (button)
 	{
 		case SDL_CONTROLLER_BUTTON_A:
@@ -31,6 +50,13 @@ static void		handle_button_press(t_env *e, uint8_t button)
 			printf("SELECT pressed\n");
 			e->bci_mode += e->bci_mode % 2;
 			break;
+		case SDL_CONTROLLER_BUTTON_START:
+			printf("START pressed\n");
+			ratio = 1.0 + lissajou_found_ratio(e);
+			e->crv_end[1].freQ = ((1.0 + ratio) / ratio) * e->crv_enf[0].freq;
+			break;
+
+
 	}
 }
 
