@@ -223,8 +223,6 @@ void		ps3_program(t_env *e)
 	{
 		handle_SDL_events(e);
 		osc_get_message(e, test_osc_handler);
-		// get osc_input
-		// set/adapt waveforme parameter
 		gen_audio(e, buf);
 		push_sound(e, buf, PERIOD_SIZE);
 	}
